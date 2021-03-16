@@ -1,0 +1,23 @@
+version: "3"
+services:
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=simpleclass
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+    - 3000:3306
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+    ports:
+      - 8000:80
+    volumes:
+      - /sessions
+    links:
+      - db

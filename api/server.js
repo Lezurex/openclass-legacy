@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const mysql = require("mysql");
+const Database = require("./database/Database");
 const app = express(),
     bodyParser = require("body-parser"),
     port = 3080;
@@ -7,10 +9,12 @@ const app = express(),
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../webapp/dist')));
 
+const database = new Database();
+
 app.get("/api/", ((req, res) => {
     res.json({
         version: "1.0.0"
-    })
+    });
 }));
 
 app.get('/', (req,res) => {

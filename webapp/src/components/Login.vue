@@ -1,6 +1,7 @@
 <template>
-  <h1>This is a test lol</h1>
-  <button class="btn btn-primary" @click="sendRequest">Send Request</button>
+  <main>
+    <div></div>
+  </main>
 </template>
 
 <script>
