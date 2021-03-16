@@ -5,7 +5,7 @@ const app = express(),
     port = 3080;
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../webapp/build')));
+app.use(express.static(path.join(__dirname, '../webapp/dist')));
 
 app.get("/api/", ((req, res) => {
     res.json({
@@ -14,7 +14,7 @@ app.get("/api/", ((req, res) => {
 }));
 
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '../webapp/build/index.html'));
+    res.sendFile(path.join(__dirname, '../webapp/dist/index.html'));
 });
 
 app.listen(port, () => {
