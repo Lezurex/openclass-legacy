@@ -1,6 +1,5 @@
 <template>
   <main>
-    <img src="https://tbz.ch/wp-content/themes/tbz/favicons/favicon.ico" alt="">
     <div class="card" id="login-div">
       <div class="card-header">
         <b>Login</b>
