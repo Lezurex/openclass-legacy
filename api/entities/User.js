@@ -3,7 +3,7 @@ const ClassRelation = require("./ClassRelation");
 
 module.exports = class User {
 
-    static users;
+    static users = {};
 
     id;
     email;
@@ -28,17 +28,17 @@ module.exports = class User {
         if (this.users.keys().find(id)) {
             return this.users[id];
         } else {
-            const result = db.query("SELECT * FROM users WHERE id = ?", [id]);
+            const result = db.con.query("SELECT * FROM users WHERE id = ?", [id]);
             console.log(result);
         }
     }
 
     static fromDatabaseResult(obj) {
         let user = new User(obj.id, obj.email, obj.password, obj.firstname, obj.lastname, obj.isAdmin);
-        const result = db.instance.con.query("SELECT * FROM classRelations WHERE FK_user = ?;", [user.id]);
+        const result = db.con.query("SELECT * FROM classRelations WHERE FK_user = ?;", [user.id]);
         for (let relationObject of result) {
             let relation = ClassRelation.fromDatabaseObject(relationObject);
-            user.classRelations.push(relation);
+            user.classRelations[relation.classId] = relation;
         }
     }
 

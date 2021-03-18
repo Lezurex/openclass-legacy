@@ -1,18 +1,22 @@
 module.exports = class ClassRelation {
 
-    id;
-    classId;
-    userId;
-    roleId;
+    static relations = {};
 
-    constructor(id, classId, userId, roleId) {
+    id;
+    class;
+    user;
+    role;
+
+    constructor(id, classInstance, user, role) {
         this.id = id;
-        this.classId = classId;
-        this.userId = userId;
-        this.roleId = roleId;
+        this.classId = classInstance;
+        this.user = user;
+        this.role = role;
     }
 
     static fromDatabaseObject(obj) {
-        return new ClassRelation(obj.id, obj.FK_class, obj.FK_user, obj.FK_role);
+        let relation = new ClassRelation(obj.id, obj.FK_class, obj.FK_user, obj.FK_role);
+        ClassRelation.relations[relation.id] = relation;
+        return relation;
     }
 }

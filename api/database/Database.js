@@ -1,17 +1,17 @@
 const mysql = require("mysql");
 const dbConfig = require("../../config/database.json");
+const initializer = require("../initializer");
 
-class Database {
+module.exports = class Database {
 
-    static instance;
+    static con;
 
-    con;
-
-    constructor() {
-        this.con = mysql.createConnection(dbConfig);
-        this.con.connect;
-        Database.instance = this;
+    static connect() {
+        Database.con = mysql.createConnection(dbConfig);
+        Database.con.connect(function () {
+            console.log("Connected!")
+            console.log(Database.con);
+            initializer();
+        });
     }
 }
-
-module.exports = Database;
