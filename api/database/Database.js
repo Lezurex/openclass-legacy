@@ -3,21 +3,14 @@ const dbConfig = require("../../config/database.json");
 
 class Database {
 
-    #_con;
+    static instance;
+
+    con;
 
     constructor() {
-        this.#_con = mysql.createConnection(dbConfig);
-        this.#_con.connect(function (err) {
-            if (err) {
-                console.error("Connection to database failed successfully: " + err.code);
-                return;
-            }
-            console.log("Connected!");
-        });
-    }
-
-    get con() {
-        return this.#_con;
+        this.con = mysql.createConnection(dbConfig);
+        this.con.connect;
+        Database.instance = this;
     }
 }
 

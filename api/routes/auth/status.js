@@ -1,3 +1,4 @@
 module.exports = (req, res) => {
-    res.json({loggedIn: true});
+    let loggedIn = req.session.user !== undefined;
+    res.json({loggedIn: loggedIn});
 }
