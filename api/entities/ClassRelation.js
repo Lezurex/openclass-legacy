@@ -7,13 +7,13 @@ module.exports = class ClassRelation {
 
     constructor(id, classInstance, user, role) {
         this.id = id;
-        this.classId = classInstance;
+        this.class = classInstance;
         this.user = user;
         this.role = role;
     }
 
     static fromDatabaseObject(obj) {
-        let relation = new ClassRelation(obj.id, obj.FK_class, obj.FK_user, obj.FK_role);
+        let relation = new ClassRelation(parseInt(obj.id), global.classes[obj.FK_class + ''], global.users[obj.FK_user + ''], global.roles[obj.FK_role + '']);
         global.classRelations[relation.id] = relation;
         return relation;
     }

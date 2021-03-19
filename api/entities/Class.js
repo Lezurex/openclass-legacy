@@ -21,7 +21,7 @@ module.exports = class Class {
 
     static async fromDatabaseObject(obj) {
         return new Promise(((mainResolve, reject) => {
-            let newClass = new Class(obj.id, obj.name)
+            let newClass = new Class(parseInt(obj.id), obj.name)
             let promises = [];
             let subjects = {};
             promises.push(new Promise(resolve => {

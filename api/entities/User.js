@@ -10,7 +10,7 @@ module.exports = class User {
     lastname;
     isAdmin;
     settings;
-    classRelations;
+    classRelations = {};
 
     constructor(id, email, password, firstname, lastname, isAdmin, settings) {
         this.id = id;
@@ -31,13 +31,19 @@ module.exports = class User {
         }
     }
 
-    static fromDatabaseResult(obj) {
-        let user = new User(obj.id, obj.email, obj.password, obj.firstname, obj.lastname, obj.isAdmin);
-        const result = db.con.query("SELECT * FROM classRelations WHERE FK_user = ?;", [user.id]);
-        for (let relationObject of result) {
-            let relation = ClassRelation.fromDatabaseObject(relationObject);
-            user.classRelations[relation.classId] = relation;
-        }
+    static async fromDatabaseObject(obj) {
+        return new Promise(mainResolve => {
+            let user = new User(parseInt(obj.id), obj.email, obj.password, obj.firstname, obj.lastname, obj.isAdmin);
+            global.users[user.id + ''] = user;
+            global.db.query("SELECT * FROM classRelation WHERE FK_user = ?;", [user.id], (err, result) => {
+                for (let relationObject of result) {
+                    let relation = ClassRelation.fromDatabaseObject(relationObject);
+                    user.classRelations[relation.id] = relation;
+                }
+                mainResolve(user);
+            });
+        })
+
     }
 
 
