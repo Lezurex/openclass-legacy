@@ -1,19 +1,30 @@
 const Database = require('./database/Database');
 const Class = require('./entities/Class');
 
-module.exports = function () {
-    initClasses();
+let connection;
+
+module.exports = async function () {
+    connection = global.db;
+    global.users = {};
+    global.classes = {};
+    global.classRelations = {};
+    global.tasks = {};
+    global.roles = {};
+    global.subjects = {};
+    await initClasses();
+
 }
 
-function initClasses() {
-    console.log(Database.con);
-    let db = Database.con;
-    let classObjects = db.query("SELECT * FROM classes;");
-
-    for (let classObject of classObjects) {
-        let classInstance = Class.fromDatabaseObject(classObject);
-    }
-    console.log(Class.classes);
+async function initClasses() {
+    return new Promise(((resolve, reject) => {
+        connection.query("SELECT * FROM classes;", async (err, classObjects) => {
+            for (let classObject of classObjects) {
+                let classInstance = await Class.fromDatabaseObject(classObject);
+                console.log(classInstance)
+            }
+            resolve(true);
+        });
+    }))
 }
 
 function initUsers() {

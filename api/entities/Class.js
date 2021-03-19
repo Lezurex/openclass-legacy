@@ -1,11 +1,9 @@
-const db = require("../database/Database");
+const con = require("../database/Database");
 const Subject = require('./Subject');
 const Role = require('./Role');
 const Task = require('./Task');
 
 module.exports = class Class {
-
-    static classes = {};
 
     id;
     name;
@@ -21,30 +19,48 @@ module.exports = class Class {
         this.tasks = tasks;
     }
 
-    static fromDatabaseObject(obj) {
-        let subjectObjects = db.con.query("SELECT * FROM subjects WHERE FK_class = ?;", [obj.id]);
-        let roleObjects = db.con.query("SELECT * FROM roles WHERE FK_class = ?;", [obj.id]);
-        let taskObjects = db.con.query("SELECT * FROM tasks WHERE FK_class = ?;", [obj.id]);
-
-        let subjects = {};
-        for (let subjectObject of subjectObjects) {
-            let subject = Subject.fromDatabaseObject(subjectObject);
-            subjects[subject.id] = subject;
-        }
-
-        let roles = {};
-        for (let roleObject of roleObjects) {
-            let role = Role.fromDatabaseObject(roleObject);
-            roles[role.id] = role;
-        }
-
-        let tasks = {};
-        for (let taskObject of taskObjects) {
-            let task = Task.fromDatabaseObject(taskObject);
-            tasks[task.id] = task;
-        }
-
-        let newClass = new Class(obj.id, obj.name)
+    static async fromDatabaseObject(obj) {
+        return new Promise(((mainResolve, reject) => {
+            let newClass = new Class(obj.id, obj.name)
+            let promises = [];
+            let subjects = {};
+            promises.push(new Promise(resolve => {
+                global.db.query("SELECT * FROM subjects WHERE FK_class = ?;", [obj.id], (err, subjectObjects) => {
+                    for (let subjectObject of subjectObjects) {
+                        let subject = Subject.fromDatabaseObject(subjectObject);
+                        subjects[subject.id] = subject;
+                    }
+                    newClass.subjects = subjects;
+                    resolve();
+                });
+            }));
+            let roles = {};
+            promises.push(new Promise(resolve => {
+                global.db.query("SELECT * FROM roles WHERE FK_class = ?;", [obj.id], (err, roleObjects) => {
+                    for (let roleObject of roleObjects) {
+                        let role = Role.fromDatabaseObject(roleObject);
+                        roles[role.id] = role;
+                    }
+                    newClass.roles = roles;
+                    resolve();
+                });
+            }))
+            let tasks = {};
+             promises.push(new Promise(resolve => {
+                 global.db.query("SELECT * FROM tasks WHERE FK_class = ?;", [obj.id], (err, taskObjects) => {
+                     for (let taskObject of taskObjects) {
+                         let task = Task.fromDatabaseObject(taskObject);
+                         tasks[task.id] = task;
+                     }
+                     newClass.tasks = tasks;
+                     resolve();
+                 });
+             }))
+            global.classes[newClass.id] = newClass;
+            Promise.all(promises).then(results => {
+                mainResolve([newClass]);
+            })
+        }))
     }
 
 }

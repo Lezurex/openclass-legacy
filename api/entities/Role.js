@@ -1,7 +1,5 @@
 module.exports = class Role {
 
-    static roles = {};
-
     id;
     name;
     permissions = {
@@ -26,7 +24,7 @@ module.exports = class Role {
             deleteTasks: obj.deleteTasks === 1,
             manageSubjects: obj.manageSubjects === 1,
         }
-        this.roles[role.id] = role;
+        global.roles[role.id] = role;
         return role;
     }
 }

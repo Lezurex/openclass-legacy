@@ -1,7 +1,5 @@
 module.exports = class ClassRelation {
 
-    static relations = {};
-
     id;
     class;
     user;
@@ -16,7 +14,7 @@ module.exports = class ClassRelation {
 
     static fromDatabaseObject(obj) {
         let relation = new ClassRelation(obj.id, obj.FK_class, obj.FK_user, obj.FK_role);
-        ClassRelation.relations[relation.id] = relation;
+        global.classRelations[relation.id] = relation;
         return relation;
     }
 }

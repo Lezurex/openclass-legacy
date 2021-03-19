@@ -1,7 +1,5 @@
 module.exports = class Subject {
 
-    static subjects = {};
-
     id;
     name;
     teacher;
@@ -15,7 +13,7 @@ module.exports = class Subject {
 
     static fromDatabaseObject(obj) {
         let subject = new Subject(obj.id, obj.name, obj.teacher);
-        this.subjects[subject.id] = subject;
+        global.subjects[subject.id] = subject;
         return subject;
     }
 }

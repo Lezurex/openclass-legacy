@@ -3,8 +3,6 @@ const ClassRelation = require("./ClassRelation");
 
 module.exports = class User {
 
-    static users = {};
-
     id;
     email;
     password;
