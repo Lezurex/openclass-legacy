@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-const dbConfig = require("../../config/database.json");
+const config = require("../../config/config.json").database;
 const initializer = require("../initializer");
 
 class Database {
@@ -7,7 +7,7 @@ class Database {
     static con;
 
     static connect() {
-        global.db = mysql.createConnection(dbConfig);
+        global.db = mysql.createConnection(config);
         global.db.on("error", error => {
             if (!error.fatal)
                 return;

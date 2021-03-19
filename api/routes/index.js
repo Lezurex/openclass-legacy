@@ -5,8 +5,9 @@ const auth = require("./auth");
 const session = require('express-session');
 const user = require("./user");
 const express = require("express");
+const config = require('./../../config/config.json');
 
-routes.use(session({secret: "AP20b", resave: false, saveUninitialized: false}));
+routes.use(session({secret: config.session.secret, resave: false, saveUninitialized: false}));
 routes.use(express.json());
 
 routes.use(((req, res, next) => {
