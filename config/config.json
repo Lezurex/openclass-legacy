@@ -1,0 +1,6 @@
+{
+  "rateLimit": {
+    "timeWindow": 5,
+    "maxRequests": 100
+  }
+}
