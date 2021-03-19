@@ -1,5 +1,3 @@
-const User = require("../../entities/User");
-
 module.exports = (req, res) => {
     let users = {};
     for (let [key, user] of Object.entries(global.users)) {

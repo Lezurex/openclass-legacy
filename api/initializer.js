@@ -1,4 +1,3 @@
-const Database = require('./database/Database');
 const Class = require('./entities/Class');
 const User = require('./entities/User');
 

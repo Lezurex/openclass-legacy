@@ -40,7 +40,7 @@ module.exports = (req, res) => {
         } else {
             res.status(400).json({
                 error: "Bad request",
-                code: 1000
+                code: 400
             });
         }
     } else {
