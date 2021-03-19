@@ -22,6 +22,55 @@ module.exports = class User {
         this.settings = settings;
     }
 
+    toJSON() {
+        let obj = {};
+        obj.id = this.id;
+        obj.email = this.email;
+        obj.firstname = this.firstname;
+        obj.lastname = this.lastname;
+        obj.isAdmin = this.isAdmin;
+        let classRelations = {};
+        for (let [key, relation] of Object.entries(this.classRelations)) {
+            classRelations[key] = relation.toJSON();
+        }
+        obj.classRelations = classRelations;
+        return obj;
+    }
+
+    async saveToDB() {
+        return new Promise(resolve => {
+            if (this.id) {
+                global.db.query("UPDATE users SET email=?,password=?,firstname=?,lastname=?,isAdmin=? WHERE id=?", [this.email, this.password, this.firstname, this.lastname, this.isAdmin, this.id], (err, result) => {
+                    if (err) console.error(err);
+                    resolve();
+                })
+            } else {
+                global.db.query("INSERT INTO users(email,password,firstname,lastname,isAdmin) VALUES (?,?,?,?,?)", [this.email, this.password, this.firstname, this.lastname, this.isAdmin, this.id], (err, result) => {
+                    if (err) console.error(err);
+                    this.id = result.insertId;
+                    global.users[this.id + ""] = this;
+                    resolve();
+                })
+            }
+
+        })
+    }
+
+    async delete() {
+        return new Promise(resolve => {
+            global.db.query("DELETE FROM users WHERE id=?;", [this.id], (err, result) => {
+                if (result.affectedRows > 0) {
+                    for (let relation of this.classRelations) {
+
+                    }
+                    delete global.users[this.id];
+                    delete this;
+                    resolve();
+                }
+            })
+        })
+    }
+
     static getById(id) {
         if (this.users.keys().find(id)) {
             return this.users[id];
@@ -43,7 +92,6 @@ module.exports = class User {
                 mainResolve(user);
             });
         })
-
     }
 
 

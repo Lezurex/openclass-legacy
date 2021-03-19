@@ -1,6 +1,4 @@
 const routes = require('express').Router();
-const models = require('./models');
-const cars = require('./cars');
 const auth = require("./auth");
 const session = require('express-session');
 const user = require("./user");
@@ -19,13 +17,11 @@ routes.use(((req, res, next) => {
             next();
         } else {
             next();
-            res.status(401).send();
+            // res.status(401).send();
         }
     }
 }))
 
-routes.use('/models', models);
-routes.use('/cars', cars);
 routes.use('/auth', auth);
 routes.use("/user", user);
 

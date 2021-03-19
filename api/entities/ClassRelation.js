@@ -12,6 +12,15 @@ module.exports = class ClassRelation {
         this.role = role;
     }
 
+    toJSON() {
+        let obj = {};
+        obj.id = this.id;
+        obj.class = this.class.id;
+        obj.user = this.user.id;
+        obj.role = this.user.role;
+        return obj;
+    }
+
     static fromDatabaseObject(obj) {
         let relation = new ClassRelation(parseInt(obj.id), global.classes[obj.FK_class + ''], global.users[obj.FK_user + ''], global.roles[obj.FK_role + '']);
         global.classRelations[relation.id] = relation;
