@@ -16,7 +16,7 @@ const limiter = new RateLimit({
     })
 })
 
-Database.connect();
+Database.createTables();
 
 app.use(express.static(path.join(__dirname, '../webapp/dist')));
 app.use(limiter);

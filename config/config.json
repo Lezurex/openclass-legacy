@@ -1,14 +1,13 @@
 {
   "rateLimit": {
     "timeWindow": 5,
-    "maxRequests": 10
+    "maxRequests": 100
   },
   "database": {
     "host": "localhost",
     "port": 3000,
     "user": "root",
-    "password": "root",
-    "database": "simpleclass"
+    "password": "root"
   },
   "session": {
     "secret": "AP20b"

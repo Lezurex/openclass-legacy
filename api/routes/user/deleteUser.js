@@ -1,5 +1,5 @@
 module.exports = async (req, res) => {
-    if (true) { // req.session.user.isAdmin
+    if (req.session.user.isAdmin) { // req.session.user.isAdmin
         if (req.params.userId in global.users) {
             let user = global.users[req.params.userId];
             await user.delete();

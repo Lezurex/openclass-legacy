@@ -17,11 +17,11 @@ routes.use(((req, res, next) => {
         if (req.session.user) {
             next();
         } else {
-            next();
-            // res.status(401).json({
-            //     error: "You need to be logged in to access this resource!",
-            //     code: 401
-            // });
+            // next();
+            res.status(401).json({
+                error: "You need to be logged in to access this resource!",
+                code: 401
+            });
         }
     }
 }));
