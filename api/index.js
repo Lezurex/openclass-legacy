@@ -1,9 +1,11 @@
 const express = require("express");
 const path = require("path");
+const fs = require('fs');
 const Database = require("./database/Database");
 const routes = require('./routes');
 const RateLimit = require('express-rate-limit');
 const config = require('./../config/config.json');
+const logger = require('morgan');
 const app = express(),
     port = 3080;
 
@@ -18,8 +20,12 @@ const limiter = new RateLimit({
 
 Database.createTables();
 
-app.use(express.static(path.join(__dirname, '../webapp/dist')));
+const date = new Date();
+app.use(logger({
+    stream: fs.createWriteStream("../logs/access-log-" + date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() + "-" + date.getHours() + "-" + date.getMinutes() + ".log", {flags: 'w'})
+}))
 app.use(limiter);
+app.use(express.static(path.join(__dirname, '../webapp/dist')));
 
 // Bind all api routes to the endpoint
 app.use('/api', routes);
