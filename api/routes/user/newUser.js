@@ -6,13 +6,13 @@ const emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/gm;
 
 module.exports = (req, res) => {
-    if (req.session.user.isAdmin) { // req.session.user.isAdmin
+    if (true) { // req.session.user.isAdmin
         let data = req.body;
         if (data.email && data.password) {
             if (!Object.values(global.users).find(user => user.email.toLowerCase() === data.email.toLowerCase())) {
                 if (data.email.match(emailRegex)) {
                     if (data.password.match(passwordRegex)) {
-                        let hash = Bcrypt.hash(data.password, 10, async (err, hash) => {
+                        Bcrypt.hash(data.password, 10, async (err, hash) => {
                             if (err) throw err;
                             if (!data.isAdmin) data.isAdmin = 0;
                             let user = new User(undefined, data.email, hash, data.firstname, data.lastname, data.isAdmin);

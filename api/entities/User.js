@@ -60,12 +60,16 @@ module.exports = class User {
         return new Promise(resolve => {
             global.db.query("DELETE FROM users WHERE id=?;", [this.id], (err, result) => {
                 if (result.affectedRows > 0) {
-                    for (let relation of this.classRelations) {
-
+                    let promises = [];
+                    for (let relation of Object.values(this.classRelations)) {
+                        delete this.classRelations[relation.id];
+                        promises.push(relation.delete());
                     }
                     delete global.users[this.id];
                     delete this;
-                    resolve();
+                    Promise.all(promises).then((value => {
+                        resolve();
+                    }))
                 }
             })
         })
@@ -76,7 +80,6 @@ module.exports = class User {
             return this.users[id];
         } else {
             const result = db.con.query("SELECT * FROM users WHERE id = ?", [id]);
-            console.log(result);
         }
     }
 

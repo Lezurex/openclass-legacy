@@ -29,6 +29,49 @@ module.exports = class Class {
         return obj;
     }
 
+    async delete() {
+        return new Promise(resolve => {
+            global.db.query("DELETE FROM classes WHERE id=?;", [this.id], (err, result) => {
+                if (result.affectedRows > 0) {
+                    let promises = [];
+                    for (let subject of Object.values(this.subjects)) {
+                        promises.push(subject.delete());
+                    }
+                    for (let task of Object.values(this.tasks)) {
+                        promises.push(task.delete());
+                    }
+                    for (let role of Object.values(this.roles)) {
+                        promises.push(role.delete());
+                    }
+                    Promise.all(promises).then(value => {
+                        delete global.classes[this.id];
+                        delete this;
+                        resolve();
+                    })
+                }
+            })
+        })
+    }
+
+    async saveToDB() {
+        return new Promise(resolve => {
+            if (this.id) {
+                global.db.query("UPDATE classes SET name=? WHERE id=?", [this.name, this.id], (err, result) => {
+                    if (err) console.error(err);
+                    resolve();
+                })
+            } else {
+                global.db.query("INSERT INTO classes(name) VALUES (?)", [this.name], (err, result) => {
+                    if (err) console.error(err);
+                    this.id = result.insertId;
+                    global.classes[this.id] = this;
+                    resolve();
+                })
+            }
+
+        })
+    }
+
     static async fromDatabaseObject(obj) {
         return new Promise(((mainResolve, reject) => {
             let newClass = new Class(parseInt(obj.id), obj.name)
