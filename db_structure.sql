@@ -8,28 +8,28 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema simpleclass
+-- Schema openclass
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema simpleclass
+-- Schema openclass
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `simpleclass` DEFAULT CHARACTER SET utf8 ;
-USE `simpleclass` ;
+CREATE SCHEMA IF NOT EXISTS `openclass` DEFAULT CHARACTER SET utf8 ;
+USE `openclass` ;
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`settings`
+-- Table `openclass`.`settings`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`settings` (
+CREATE TABLE IF NOT EXISTS `openclass`.`settings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`users`
+-- Table `openclass`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`users` (
+CREATE TABLE IF NOT EXISTS `openclass`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
@@ -41,16 +41,16 @@ CREATE TABLE IF NOT EXISTS `simpleclass`.`users` (
   INDEX `FK_settings_idx` (`FK_settings` ASC),
   CONSTRAINT `FK_userSettings`
     FOREIGN KEY (`FK_settings`)
-    REFERENCES `simpleclass`.`settings` (`id`)
+    REFERENCES `openclass`.`settings` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`classes`
+-- Table `openclass`.`classes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`classes` (
+CREATE TABLE IF NOT EXISTS `openclass`.`classes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -58,9 +58,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`roles`
+-- Table `openclass`.`roles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`roles` (
+CREATE TABLE IF NOT EXISTS `openclass`.`roles` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `addTasks` TINYINT NOT NULL DEFAULT 0,
@@ -72,16 +72,16 @@ CREATE TABLE IF NOT EXISTS `simpleclass`.`roles` (
   INDEX `FK_class_idx` (`FK_class` ASC),
   CONSTRAINT `FK_classRole`
     FOREIGN KEY (`FK_class`)
-    REFERENCES `simpleclass`.`classes` (`id`)
+    REFERENCES `openclass`.`classes` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`classRelation`
+-- Table `openclass`.`classRelation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`classRelation` (
+CREATE TABLE IF NOT EXISTS `openclass`.`classRelation` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FK_user` INT NOT NULL,
   `FK_class` INT NOT NULL,
@@ -92,26 +92,26 @@ CREATE TABLE IF NOT EXISTS `simpleclass`.`classRelation` (
   INDEX `FK_role_idx` (`FK_role` ASC),
   CONSTRAINT `FK_userRelation`
     FOREIGN KEY (`FK_user`)
-    REFERENCES `simpleclass`.`users` (`id`)
+    REFERENCES `openclass`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_classRelation`
     FOREIGN KEY (`FK_class`)
-    REFERENCES `simpleclass`.`classes` (`id`)
+    REFERENCES `openclass`.`classes` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_roleRelation`
     FOREIGN KEY (`FK_role`)
-    REFERENCES `simpleclass`.`roles` (`id`)
+    REFERENCES `openclass`.`roles` (`id`)
     ON DELETE SET NULL
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`subjects`
+-- Table `openclass`.`subjects`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`subjects` (
+CREATE TABLE IF NOT EXISTS `openclass`.`subjects` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `teacher` VARCHAR(45) NULL,
@@ -120,16 +120,16 @@ CREATE TABLE IF NOT EXISTS `simpleclass`.`subjects` (
   INDEX `FK_class_idx` (`FK_class` ASC),
   CONSTRAINT `FK_classSubject`
     FOREIGN KEY (`FK_class`)
-    REFERENCES `simpleclass`.`classes` (`id`)
+    REFERENCES `openclass`.`classes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`tasks`
+-- Table `openclass`.`tasks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`tasks` (
+CREATE TABLE IF NOT EXISTS `openclass`.`tasks` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `body` TEXT NULL,
@@ -141,42 +141,42 @@ CREATE TABLE IF NOT EXISTS `simpleclass`.`tasks` (
   INDEX `FK_subject_idx` (`FK_subject` ASC),
   CONSTRAINT `FK_classTask`
     FOREIGN KEY (`FK_class`)
-    REFERENCES `simpleclass`.`classes` (`id`)
+    REFERENCES `openclass`.`classes` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_subjectTask`
     FOREIGN KEY (`FK_subject`)
-    REFERENCES `simpleclass`.`subjects` (`id`)
+    REFERENCES `openclass`.`subjects` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`ticks`
+-- Table `openclass`.`ticks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`ticks` (
+CREATE TABLE IF NOT EXISTS `openclass`.`ticks` (
   `FK_task` INT NOT NULL,
   `FK_user` INT NOT NULL,
   INDEX `FK_task_idx` (`FK_task` ASC),
   INDEX `FK_user_idx` (`FK_user` ASC),
   CONSTRAINT `FK_taskTick`
     FOREIGN KEY (`FK_task`)
-    REFERENCES `simpleclass`.`tasks` (`id`)
+    REFERENCES `openclass`.`tasks` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `FK_userTick`
     FOREIGN KEY (`FK_user`)
-    REFERENCES `simpleclass`.`users` (`id`)
+    REFERENCES `openclass`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `simpleclass`.`emailVerify`
+-- Table `openclass`.`emailVerify`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `simpleclass`.`emailVerify` (
+CREATE TABLE IF NOT EXISTS `openclass`.`emailVerify` (
   `newEmail` VARCHAR(45) NOT NULL,
   `code` VARCHAR(6) NOT NULL,
   `expires` DATETIME NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `simpleclass`.`emailVerify` (
   UNIQUE INDEX `FK_user_UNIQUE` (`FK_user` ASC),
   CONSTRAINT `FK_userVerify`
     FOREIGN KEY (`FK_user`)
-    REFERENCES `simpleclass`.`users` (`id`)
+    REFERENCES `openclass`.`users` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

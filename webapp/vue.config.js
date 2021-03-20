@@ -11,7 +11,7 @@ module.exports = {
         config
             .plugin('html')
             .tap(args => {
-                args[0].title = "SimpleClass";
+                args[0].title = "OpenClass";
                 return args;
             })
     }

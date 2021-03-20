@@ -10,7 +10,6 @@ class Database {
     static con;
 
     static connect() {
-        config.database = "simpleclass";
         global.db = mysql.createConnection(config);
         global.db.on("error", error => {
             if (!error.fatal)
@@ -40,15 +39,17 @@ class Database {
                 console.error(err);
                 console.error("Database structure file failed to load!");
             } else {
-                config.database = "simpleclass";
-                config.multipleStatements = true;
-                const con = mysql.createConnection(config);
+                let script = data.replace(/openclass/g, config.database);
+                let settings = Object.create(config);
+                settings.multipleStatements = true;
+                delete settings.database;
+                const con = mysql.createConnection(settings);
                 con.connect((err) => {
                     if (err) {
                         console.error(err);
                         console.error("Couldn't connect to database to create required tables!");
                     } else {
-                        con.query(data, (err, result) => {
+                        con.query(script, (err, result) => {
                             if (err) {
                                 console.error(err);
                                 console.error("Couldn't create required tables in database!")
