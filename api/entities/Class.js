@@ -19,6 +19,16 @@ module.exports = class Class {
         this.tasks = tasks;
     }
 
+    toJSON() {
+        let obj = {};
+        obj.id = this.id;
+        obj.name = this.name;
+        obj.subjects = this.subjects;
+        obj.roles = this.roles;
+        obj.tasks = this.tasks;
+        return obj;
+    }
+
     static async fromDatabaseObject(obj) {
         return new Promise(((mainResolve, reject) => {
             let newClass = new Class(parseInt(obj.id), obj.name)

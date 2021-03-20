@@ -24,7 +24,7 @@ async function initClasses() {
             for (let classObject of classObjects) {
                 await Class.fromDatabaseObject(classObject);
             }
-            resolve(true);
+            resolve();
         });
     }))
 }

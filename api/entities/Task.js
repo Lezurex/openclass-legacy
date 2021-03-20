@@ -19,6 +19,7 @@ module.exports = class Task {
     static fromDatabaseObject(obj) {
         let task = new Task(obj.id, obj.title, obj.body, obj.dueDate, obj.FK_subject, obj.FK_class);
         global.tasks[task.id] = task;
+        return task;
     }
 
 }
