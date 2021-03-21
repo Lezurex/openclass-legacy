@@ -5,12 +5,14 @@ const subjects = require('./subjects');
 const roles = require('./roles');
 const tasks = require('./tasks');
 const newClass = require('./new');
+const deleteClass = require('./delete');
+const update = require('./update');
 
 classRouter.param('classId', ((req, res, next, value) => {
     const classObj = Object.values(global.classes).find(candidate => candidate.id === (value * 1));
 
     if (classObj) {
-        req['class'] = classObj;
+        req.class = classObj;
         next();
     } else {
         res.status(404).json({
@@ -25,6 +27,8 @@ classRouter.use('/:classId/tasks', tasks);
 
 classRouter.get('/', all);
 classRouter.get("/:classId", single);
+classRouter.delete("/:classId", deleteClass);
+classRouter.patch('/:classId', update);
 classRouter.post("/", newClass);
 
 module.exports = classRouter;
