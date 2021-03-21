@@ -1,3 +1,5 @@
+const Tick = require('./Tick');
+
 module.exports = class Task {
 
     id;
@@ -6,6 +8,7 @@ module.exports = class Task {
     dueDate;
     subjectId;
     classId;
+    ticks = {};
 
     constructor(id, title, body, dueDate, subjectId, classId) {
         this.id = id;
@@ -14,6 +17,17 @@ module.exports = class Task {
         this.dueDate = dueDate;
         this.subjectId = subjectId;
         this.classId = classId;
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            title: this.title,
+            body: this.body,
+            dueDate: this.dueDate.toISOString(),
+            subject: this.subjectId,
+            classId: this.classId,
+        }
     }
 
     async delete() {
@@ -47,10 +61,18 @@ module.exports = class Task {
         })
     }
 
-    static fromDatabaseObject(obj) {
-        let task = new Task(obj.id, obj.title, obj.body, obj.dueDate, obj.FK_subject, obj.FK_class);
-        global.tasks[task.id] = task;
-        return task;
+    static async fromDatabaseObject(obj) {
+        return new Promise(resolve => {
+            let task = new Task(obj.id, obj.title, obj.body, obj.dueDate, obj.FK_subject, obj.FK_class);
+            global.tasks[task.id] = task;
+            global.db.query("SELECT * FROM ticks WHERE FK_task=?", [task.id], (err, result) => {
+                for (let tickObj of result) {
+                    let tick = Tick.fromDatabaseObject(tickObj);
+                    task.ticks[tick.id] = tick;
+                }
+                resolve(task);
+            })
+        })
     }
 
-}
+};

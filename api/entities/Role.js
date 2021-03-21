@@ -18,6 +18,15 @@ module.exports = class Role {
         this.permissions = permissions;
     }
 
+    toJSON() {
+        return {
+            id: this.id,
+            name: this.name,
+            class: this.classObj.id,
+            permissions: this.permissions
+        }
+    }
+
     async delete() {
         return new Promise(resolve => {
             global.db.query("DELETE FROM roles WHERE id=?;", [this.id], (err, result) => {

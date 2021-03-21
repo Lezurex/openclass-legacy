@@ -20,12 +20,24 @@ module.exports = class Class {
     }
 
     toJSON() {
+        let subjects = [];
+        for (let subject of Object.values(this.subjects)) {
+            subjects.push(subject.id);
+        }
+        let roles = [];
+        for (let role of Object.values(this.roles)) {
+            roles.push(role.id);
+        }
+        let tasks = [];
+        for (let task of Object.values(this.subjects)) {
+            tasks.push(task.id);
+        }
         let obj = {};
         obj.id = this.id;
         obj.name = this.name;
-        obj.subjects = this.subjects;
-        obj.roles = this.roles;
-        obj.tasks = this.tasks;
+        obj.subjects = subjects;
+        obj.roles = roles;
+        obj.tasks = tasks;
         return obj;
     }
 

@@ -16,7 +16,6 @@ module.exports = async function () {
     global.ticks = {};
     await initClasses();
     await initUsers();
-    await initTicks();
     console.log("Data retrieved successfully!");
 }
 
@@ -38,18 +37,6 @@ async function initUsers() {
         connection.query("SELECT * FROM users;", async (err, userObjects) => {
             for (let userObject of userObjects) {
                 let user = await User.fromDatabaseObject(userObject);
-            }
-            resolve();
-        })
-    })
-}
-
-async function initTicks() {
-    console.log("Initializing ticks...");
-    return new Promise(resolve => {
-        connection.query("SELECT * FROM ticks;", async (err, tickObjects) => {
-            for (let tickObject of tickObjects) {
-                let tick = await Tick.fromDatabaseObject(tickObject);
             }
             resolve();
         })

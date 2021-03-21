@@ -12,6 +12,15 @@ module.exports = class Subject {
         this.classObj = classObj;
     }
 
+    toJSON() {
+        return {
+            id: this.id,
+            name: this.name,
+            teacher: this.teacher,
+            class: this.classObj.id
+        }
+    }
+
     async delete() {
         return new Promise(resolve => {
             global.db.query("DELETE FROM subjects WHERE id=?;", [this.id], (err, result) => {
@@ -28,15 +37,15 @@ module.exports = class Subject {
     async saveToDB() {
         return new Promise(resolve => {
             if (this.id) {
-                global.db.query("UPDATE ticks SET FK_task=?,FK_user=? WHERE id=?", [this.task.id, this.user.id, this.id], (err, result) => {
+                global.db.query("UPDATE subjects SET name=?,teacher=?,FK_class=? WHERE id=?", [this.name, this.teacher, this.classObj.id, this.id], (err, result) => {
                     if (err) console.error(err);
                     resolve();
                 })
             } else {
-                global.db.query("INSERT INTO ticks(FK_task, FK_user) VALUES (?,?)", [this.task.id, this.user.id], (err, result) => {
+                global.db.query("INSERT INTO subjects(name,teacher,FK_class) VALUES (?,?,?)", [this.name, this.teacher, this.classObj.id], (err, result) => {
                     if (err) console.error(err);
                     this.id = result.insertId;
-                    global.ticks[this.id] = this;
+                    global.subjects[this.id] = this;
                     resolve();
                 })
             }

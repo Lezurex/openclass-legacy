@@ -14,6 +14,7 @@ module.exports = class Tick {
     static fromDatabaseObject(obj) {
         let tick = new Tick(obj.id, global.tasks[obj.FK_task], global.users[obj.FK_user]);
         global.ticks[tick.id] = tick;
+        return tick;
     }
 
     async delete() {
