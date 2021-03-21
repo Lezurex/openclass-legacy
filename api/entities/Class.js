@@ -14,9 +14,9 @@ module.exports = class Class {
     constructor(id, name, subjects, roles, tasks) {
         this.id = id;
         this.name = name;
-        this.subjects = subjects;
-        this.roles = roles;
-        this.tasks = tasks;
+        subjects ? this.subjects = subjects : this.subjects = {};
+        roles ? this.roles = roles : this.roles = {};
+        tasks ? this.tasks = tasks : this.tasks = {};
     }
 
     toJSON() {

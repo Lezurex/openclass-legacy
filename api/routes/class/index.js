@@ -4,6 +4,7 @@ const single = require('./single');
 const subjects = require('./subjects');
 const roles = require('./roles');
 const tasks = require('./tasks');
+const newClass = require('./new');
 
 classRouter.param('classId', ((req, res, next, value) => {
     const classObj = Object.values(global.classes).find(candidate => candidate.id === (value * 1));
@@ -24,5 +25,6 @@ classRouter.use('/:classId/tasks', tasks);
 
 classRouter.get('/', all);
 classRouter.get("/:classId", single);
+classRouter.post("/", newClass);
 
 module.exports = classRouter;
