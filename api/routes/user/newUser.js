@@ -6,7 +6,7 @@ const emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/gm;
 
 module.exports = (req, res) => {
-    if (req.session.user.isAdmin) { // req.session.user.isAdmin
+    if (req.session.user.isAdmin) {
         let data = req.body;
         if (data.email && data.password) {
             if (!Object.values(global.users).find(user => user.email.toLowerCase() === data.email.toLowerCase())) {
