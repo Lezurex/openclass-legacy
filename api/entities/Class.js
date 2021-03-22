@@ -29,7 +29,7 @@ module.exports = class Class {
             roles.push(role.id);
         }
         let tasks = [];
-        for (let task of Object.values(this.subjects)) {
+        for (let task of Object.values(this.tasks)) {
             tasks.push(task.id);
         }
         let obj = {};
