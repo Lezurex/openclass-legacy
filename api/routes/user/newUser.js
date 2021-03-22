@@ -23,13 +23,13 @@ module.exports = (req, res) => {
                         });
                     }
                     break;
-                case 1001:
+                case 1002:
                     res.status(400).json({
                         error: "Invalid email!",
                         code: 1002
                     });
                     break;
-                case 1002:
+                case 1001:
                     res.status(400).json({
                         error: "Email already registered!",
                         code: 1001
