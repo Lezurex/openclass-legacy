@@ -25,6 +25,8 @@ module.exports = class Subject {
         return new Promise(resolve => {
             global.db.query("DELETE FROM subjects WHERE id=?;", [this.id], (err, result) => {
                 if (result.affectedRows > 0) {
+                    let tasksToDelete = Object.values(this.classObj.tasks).filter(task => task.subjectId === this.id);
+                    tasksToDelete.forEach(task => task.delete());
                     delete global.subjects[this.id];
                     delete this.classObj.subjects[this.id];
                     delete this;
