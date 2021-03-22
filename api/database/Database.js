@@ -5,10 +5,17 @@ const fs = require('fs');
 
 const dbStructurePath = "../db_structure.sql";
 
+/**
+ * Class used to connect to the database and initialize it.
+ */
 class Database {
 
     static con;
 
+    /**
+     * Connects to the database with the given options. Initializes an event handler when
+     * the connection gets lost and tries to reconnect.
+     */
     static connect() {
         config.database === undefined ? config.database = 'openclass' : '';
         global.db = mysql.createConnection(config);
@@ -33,6 +40,9 @@ class Database {
         });
     }
 
+    /**
+     * Initializes the database with the required tables by executing the SQL script.
+     */
     static createTables() {
         fs.readFile(dbStructurePath, "UTF-8", (err, data) => {
             console.log("Initializing database with required tables...");

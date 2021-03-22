@@ -1,8 +1,12 @@
-const con = require("../database/Database");
 const Subject = require('./Subject');
 const Role = require('./Role');
 const Task = require('./Task');
 
+/**
+ * A class is the foundation of the application. Tasks, roles and subjects live inside of a class.
+ * A user can belong to a class through a {@link ClassRelation}.
+ * @class Class
+ */
 module.exports = class Class {
 
     id;
@@ -11,6 +15,14 @@ module.exports = class Class {
     roles;
     tasks;
 
+    /**
+     * Create a new class instance
+     * @param id {number} Unique identifier to quickly access the class inside the database or the global list
+     * @param name {string} Display name of the class
+     * @param subjects {Object} List with {@link Subject Subjects} and their IDs as key
+     * @param roles {Object} List with {@link Role Roles} and their IDs as key
+     * @param tasks {Object} List with {@link Task Tasks} and their IDs as key
+     */
     constructor(id, name, subjects, roles, tasks) {
         this.id = id;
         this.name = name;
@@ -19,6 +31,10 @@ module.exports = class Class {
         tasks ? this.tasks = tasks : this.tasks = {};
     }
 
+    /**
+     * Converts the instance to a JSON object without circular values.
+     * @returns {Object} A simplified object of the instance.
+     */
     toJSON() {
         let subjects = [];
         for (let subject of Object.values(this.subjects)) {
@@ -41,6 +57,11 @@ module.exports = class Class {
         return obj;
     }
 
+    /**
+     * Deletes the class from the database and the cache, including all the relations to it.
+     * @async
+     * @returns {Promise<>} Resolved when database queries are finished.
+     */
     async delete() {
         return new Promise(resolve => {
             global.db.query("DELETE FROM classes WHERE id=?;", [this.id], (err, result) => {
@@ -65,6 +86,11 @@ module.exports = class Class {
         })
     }
 
+    /**
+     * Saves the instance to the database or creates a new entry if the id is undefined.
+     * @async
+     * @returns {Promise<>} Resolved when database queries are finished.
+     */
     async saveToDB() {
         return new Promise(resolve => {
             if (this.id) {
@@ -84,6 +110,11 @@ module.exports = class Class {
         })
     }
 
+    /**
+     * Converts an entry from the database into a instance and loads all of its relations (tasks, roles, subjects).
+     * @param obj {Object} Database entry object
+     * @returns {Promise<Class>} Resolved when everything has been loaded.
+     */
     static async fromDatabaseObject(obj) {
         return new Promise(((mainResolve, reject) => {
             let newClass = new Class(parseInt(obj.id), obj.name)
