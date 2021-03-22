@@ -8,12 +8,21 @@ const newClass = require('./new');
 const deleteClass = require('./delete');
 const update = require('./update');
 
+const isInClass = require('./permissionChecker').isInClass;
+
 classRouter.param('classId', ((req, res, next, value) => {
     const classObj = Object.values(global.classes).find(candidate => candidate.id === (value * 1));
 
     if (classObj) {
-        req.class = classObj;
-        next();
+        if (req.session.user.isAdmin || isInClass(req.session.user, classObj)) {
+            req.class = classObj;
+            next();
+        } else {
+            res.status(403).json({
+                error: "Forbidden. You are not a member of this class.",
+                code: 403
+            });
+        }
     } else {
         res.status(404).json({
             error: "Requested class was not found!",
