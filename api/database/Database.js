@@ -61,7 +61,7 @@ class Database {
                         console.error(err);
                         console.error("Couldn't connect to database to create required tables! Please check the credentials and restart to retry!");
                     } else {
-                        con.query(script, (err, result) => {
+                        con.query(script, err => {
                             if (err) {
                                 console.error(err);
                                 console.error("Couldn't create required tables in database!")

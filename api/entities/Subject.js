@@ -1,3 +1,8 @@
+/**
+ * Used to describe a category or group of tasks of a certain subject in school.
+ * Tasks are relating to subjects.
+ * @class Subject
+ */
 module.exports = class Subject {
 
     id;
@@ -5,6 +10,13 @@ module.exports = class Subject {
     teacher;
     classObj;
 
+    /**
+     * Creates a new subject instance.
+     * @param id {number} Unique identifier to quickly access the class inside the database or the {@link global.subjects} list
+     * @param name {string} Display name of the subject
+     * @param teacher {string} Name of the teacher teaching this subject in school
+     * @param classObj {Class} The class to which this subject belongs to
+     */
     constructor(id, name, teacher, classObj) {
         this.id = id;
         this.name = name;
@@ -12,6 +24,10 @@ module.exports = class Subject {
         this.classObj = classObj;
     }
 
+    /**
+     * Converts the instance to a JSON object without circular values.
+     * @returns {{id:number,name:string,teacher:string,class:number}} A simplified object of the instance. Class is linked with its ID.
+     */
     toJSON() {
         return {
             id: this.id,
@@ -21,6 +37,11 @@ module.exports = class Subject {
         }
     }
 
+    /**
+     * Deletes the subject from the database and the cache, including all the related tasks to it.
+     * @async
+     * @returns {Promise<>} Resolved when database queries are finished.
+     */
     async delete() {
         return new Promise(resolve => {
             global.db.query("DELETE FROM subjects WHERE id=?;", [this.id], (err, result) => {
@@ -36,6 +57,11 @@ module.exports = class Subject {
         })
     }
 
+    /**
+     * Saves the instance to the database or creates a new entry if the id is undefined.
+     * @async
+     * @returns {Promise<>} Resolved when database queries are finished.
+     */
     async saveToDB() {
         return new Promise(resolve => {
             if (this.id) {
@@ -55,6 +81,11 @@ module.exports = class Subject {
         })
     }
 
+    /**
+     * Converts an entry from the database into an instance.
+     * @param obj {{id:number,name:string,teacher:string,FK_class:number}} Database entry object
+     * @returns {Subject} Converted subject instance.
+     */
     static fromDatabaseObject(obj) {
         let subject = new Subject(obj.id, obj.name, obj.teacher, global.classes[obj.FK_class]);
         global.subjects[subject.id] = subject;

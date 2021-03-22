@@ -33,7 +33,8 @@ module.exports = class Class {
 
     /**
      * Converts the instance to a JSON object without circular values.
-     * @returns {{}} A simplified object of the instance
+     * @returns {{id:number,name:string,subjects:[number],roles:[number],tasks:[number]}}
+     * A simplified object of the instance. Subjects, roles and tasks are linked with their IDs.
      */
     toJSON() {
         let subjects = [];

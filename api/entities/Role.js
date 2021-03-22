@@ -30,7 +30,8 @@ module.exports = class Role {
 
     /**
      * Converts the instance to a JSON object without circular values.
-     * @returns {{id:number,name:string,class:Class,permissions:{addTasks:boolean,editTasks:boolean,deleteTasks:boolean,manageSubjects:boolean}}} A simplified object of the instance
+     * @returns {{id:number,name:string,class:number,permissions:{addTasks:boolean,editTasks:boolean,deleteTasks:boolean,manageSubjects:boolean}}}
+     * A simplified object of the instance. Class is linked with its ID.
      */
     toJSON() {
         return {

@@ -1,5 +1,9 @@
 const Tick = require('./Tick');
 
+/**
+ * Represents a single task/assignment of a class and keeps information about it.
+ * @class Task
+ */
 module.exports = class Task {
 
     id;
@@ -10,6 +14,15 @@ module.exports = class Task {
     classId;
     ticks = {};
 
+    /**
+     * Creates a new task instance.
+     * @param id {number} Unique identifier to quickly access the class inside the database or the {@link global.tasks} list
+     * @param title {string} Short heading of the task
+     * @param body {string} Longer description of the task with details. Can contain HTML-formatted content.
+     * @param dueDate {Date} Date when this task should be done
+     * @param subjectId {number} ID of the related subject
+     * @param classId {number} ID of the class this task belongs to
+     */
     constructor(id, title, body, dueDate, subjectId, classId) {
         this.id = id;
         this.title = title;
@@ -19,6 +32,11 @@ module.exports = class Task {
         this.classId = classId;
     }
 
+    /**
+     * Converts the instance to a JSON object without circular values.
+     * @returns {{id:number,title:string,body:string,dueDate:string,subject:number,class:number}}
+     * A simplified object of the instance. Class and subject are linked with its IDs. Date is formatted as ISO string.
+     */
     toJSON() {
         return {
             id: this.id,
@@ -26,10 +44,15 @@ module.exports = class Task {
             body: this.body,
             dueDate: this.dueDate.toISOString(),
             subject: this.subjectId,
-            classId: this.classId,
+            class: this.classId,
         }
     }
 
+    /**
+     * Deletes the task from the database and the cache and removes it from the class.
+     * @async
+     * @returns {Promise<>} Resolved when database queries are finished.
+     */
     async delete() {
         return new Promise(resolve => {
             global.db.query("DELETE FROM tasks WHERE id=?;", [this.id], (err, result) => {
@@ -43,6 +66,11 @@ module.exports = class Task {
         })
     }
 
+    /**
+     * Saves the instance to the database or creates a new entry if the id is undefined.
+     * @async
+     * @returns {Promise<>} Resolved when database queries are finished.
+     */
     async saveToDB() {
         return new Promise(resolve => {
             if (this.id) {
@@ -62,6 +90,12 @@ module.exports = class Task {
         })
     }
 
+    /**
+     * Converts an entry from the database into an instance.
+     * @param obj {{id:number,title:string,body:string,dueDate:Date,FK_subject:number,FK_class:number}} Database entry object
+     * @returns {Promise<Task>} Promise with converted task instance when finished.
+     * @async
+     */
     static async fromDatabaseObject(obj) {
         return new Promise(resolve => {
             let task = new Task(obj.id, obj.title, obj.body, obj.dueDate, obj.FK_subject, obj.FK_class);

@@ -1,6 +1,5 @@
 const Class = require('./entities/Class');
 const User = require('./entities/User');
-const Tick = require('./entities/Tick');
 
 let connection;
 
@@ -21,7 +20,7 @@ module.exports = async function () {
 
 async function initClasses() {
     console.log("Initializing classes...");
-    return new Promise(((resolve, reject) => {
+    return new Promise((resolve => {
         connection.query("SELECT * FROM classes;", async (err, classObjects) => {
             for (let classObject of classObjects) {
                 await Class.fromDatabaseObject(classObject);
@@ -36,7 +35,7 @@ async function initUsers() {
     return new Promise(resolve => {
         connection.query("SELECT * FROM users;", async (err, userObjects) => {
             for (let userObject of userObjects) {
-                let user = await User.fromDatabaseObject(userObject);
+                await User.fromDatabaseObject(userObject);
             }
             resolve();
         })

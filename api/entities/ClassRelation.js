@@ -27,7 +27,7 @@ module.exports = class ClassRelation {
 
     /**
      * Converts the instance to a JSON object without circular values.
-     * @returns {{}} A simplified object of the instance
+     * @returns {{id:number,class:number,user:number,role:Role}} A simplified object of the instance
      */
     toJSON() {
         let obj = {};
@@ -82,8 +82,8 @@ module.exports = class ClassRelation {
 
     /**
      * Converts an entry from the database into a instance.
-     * @param obj {{}} Database entry object
-     * @returns {Promise<ClassRelation>} Resolved when everything has been loaded.
+     * @param obj {{id:number,FK_class:number,FK_user:number,FK_role:number}} Database entry object
+     * @returns {ClassRelation} Converted ClassRelation instance
      */
     static fromDatabaseObject(obj) {
         let relation = new ClassRelation(parseInt(obj.id), global.classes[obj.FK_class + ''], global.users[obj.FK_user + ''], global.roles[obj.FK_role + '']);
