@@ -20,6 +20,8 @@ subjects.param("subjectId", ((req, res, next, value) => {
 
 subjects.get('/', all);
 subjects.post('/', newSubject);
-subjects.get('/:subjectId', single)
+subjects.patch('/:subjectId', update);
+subjects.delete('/:subjectId', deleteSubject);
+subjects.get('/:subjectId', single);
 
 module.exports = subjects;
