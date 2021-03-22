@@ -1,3 +1,8 @@
+/**
+ * The class relation connects a {@link User} with a {@link Class} and defines their relation.
+ * The relation also includes the {@link Role} of the user in that class, which contains permissions.
+ * @class ClassRelation
+ */
 module.exports = class ClassRelation {
 
     id;
@@ -5,6 +10,14 @@ module.exports = class ClassRelation {
     user;
     role;
 
+    /**
+     * Creates a new ClassRelation instance
+     * @param id {number} Unique identifier to quickly access the class relation inside the database or the
+     * {@link global.classRelations} list
+     * @param classInstance {Class} Instance of the class related to the user
+     * @param user {User} Instance of the user related to the class
+     * @param role {Role} The role of the user inside the class
+     */
     constructor(id, classInstance, user, role) {
         this.id = id;
         this.class = classInstance;
@@ -12,6 +25,10 @@ module.exports = class ClassRelation {
         this.role = role;
     }
 
+    /**
+     * Converts the instance to a JSON object without circular values.
+     * @returns {{}} A simplified object of the instance
+     */
     toJSON() {
         let obj = {};
         obj.id = this.id;
@@ -21,6 +38,11 @@ module.exports = class ClassRelation {
         return obj;
     }
 
+    /**
+     * Deletes the relation from the database and the cache.
+     * @async
+     * @returns {Promise<>} Resolved when the database query is finished.
+     */
     async delete() {
         return new Promise(resolve => {
             global.db.query("DELETE FROM classRelation WHERE id=?;", [this.id], (err, result) => {
@@ -34,6 +56,11 @@ module.exports = class ClassRelation {
         })
     }
 
+    /**
+     * Saves the instance to the database or creates a new entry if the id is undefined.
+     * @async
+     * @returns {Promise<>} Resolved when the database queries are finished.
+     */
     async saveToDB() {
         return new Promise(resolve => {
             if (this.id) {
@@ -53,6 +80,11 @@ module.exports = class ClassRelation {
         })
     }
 
+    /**
+     * Converts an entry from the database into a instance.
+     * @param obj {{}} Database entry object
+     * @returns {Promise<ClassRelation>} Resolved when everything has been loaded.
+     */
     static fromDatabaseObject(obj) {
         let relation = new ClassRelation(parseInt(obj.id), global.classes[obj.FK_class + ''], global.users[obj.FK_user + ''], global.roles[obj.FK_role + '']);
         global.classRelations[relation.id] = relation;

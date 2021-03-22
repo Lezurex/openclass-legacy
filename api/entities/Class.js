@@ -16,8 +16,8 @@ module.exports = class Class {
     tasks;
 
     /**
-     * Create a new class instance
-     * @param id {number} Unique identifier to quickly access the class inside the database or the global list
+     * Creates a new class instance
+     * @param id {number} Unique identifier to quickly access the class inside the database or the {@link global.classes} list
      * @param name {string} Display name of the class
      * @param subjects {Object} List with {@link Subject Subjects} and their IDs as key
      * @param roles {Object} List with {@link Role Roles} and their IDs as key
@@ -33,7 +33,7 @@ module.exports = class Class {
 
     /**
      * Converts the instance to a JSON object without circular values.
-     * @returns {Object} A simplified object of the instance.
+     * @returns {{}} A simplified object of the instance
      */
     toJSON() {
         let subjects = [];
