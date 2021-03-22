@@ -1,7 +1,8 @@
 const Subject = require('../../../entities/Subject');
+const hasPermission = require('../permissionChecker');
 
 module.exports = async (req, res) => {
-    if (req.session.user.isAdmin || hasPermission(req.session.user, req.class)) {
+    if (req.session.user.isAdmin || hasPermission(req.session.user, req.class, 'manageSubjects')) {
         let data = req.body;
         if (data.name && data.teacher) {
             let subject = new Subject(undefined, data.name, data.teacher, req.class);
@@ -20,9 +21,4 @@ module.exports = async (req, res) => {
             code: "403"
         })
     }
-}
-
-function hasPermission(user, classObj) {
-    let relation = Object.values(user.classRelations).find(relation => relation.class.id === classObj.id && relation.role.permissions.manageSubjects);
-    return !!relation;
 }

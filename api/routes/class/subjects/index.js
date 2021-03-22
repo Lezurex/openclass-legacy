@@ -2,6 +2,8 @@ const subjects = require('express').Router({mergeParams: true});
 const all = require('./all');
 const single = require('./single');
 const newSubject = require('./new');
+const update = require('./update');
+const deleteSubject = require('./delete');
 
 subjects.param("subjectId", ((req, res, next, value) => {
     let subject = req.class.subjects[value];

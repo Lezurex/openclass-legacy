@@ -111,16 +111,20 @@ module.exports = class Class {
                 });
             }))
             let tasks = {};
-             promises.push(new Promise(resolve => {
-                 global.db.query("SELECT * FROM tasks WHERE FK_class = ?;", [obj.id], (err, taskObjects) => {
-                     for (let taskObject of taskObjects) {
-                         let task = Task.fromDatabaseObject(taskObject);
-                         tasks[task.id] = task;
-                     }
-                     newClass.tasks = tasks;
-                     resolve();
-                 });
-             }))
+            promises.push(new Promise(resolve => {
+                global.db.query("SELECT * FROM tasks WHERE FK_class = ?;", [obj.id], (err, taskObjects) => {
+                    let taskPromises = [];
+                    for (let taskObject of taskObjects) {
+                        taskPromises.push(Task.fromDatabaseObject(taskObject).then(task => {
+                            tasks[task.id] = task;
+                        }));
+                    }
+                    Promise.all(taskPromises).then(() => {
+                        newClass.tasks = tasks;
+                        resolve();
+                    })
+                });
+            }))
             global.classes[newClass.id] = newClass;
             Promise.all(promises).then(results => {
                 mainResolve([newClass]);

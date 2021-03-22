@@ -34,6 +34,7 @@ module.exports = class Task {
         return new Promise(resolve => {
             global.db.query("DELETE FROM tasks WHERE id=?;", [this.id], (err, result) => {
                 if (result.affectedRows > 0) {
+                    delete global.classes[this.classId].tasks[this.id];
                     delete global.tasks[this.id];
                     delete this;
                     resolve();
@@ -65,6 +66,7 @@ module.exports = class Task {
         return new Promise(resolve => {
             let task = new Task(obj.id, obj.title, obj.body, obj.dueDate, obj.FK_subject, obj.FK_class);
             global.tasks[task.id] = task;
+            global.classes[task.classId].tasks[task.id] = task;
             global.db.query("SELECT * FROM ticks WHERE FK_task=?", [task.id], (err, result) => {
                 for (let tickObj of result) {
                     let tick = Tick.fromDatabaseObject(tickObj);
