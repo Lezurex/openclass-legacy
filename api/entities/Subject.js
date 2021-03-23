@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2021 Lenny Angst. All rights reserved.
+ * For more information about the license read the LICENSE file at the root of this repo.
+ * Written for Project: openclass
+ * Last modified: 23.03.21, 17:19
+ */
+
 /**
  * Used to describe a category or group of tasks of a certain subject in school.
  * Tasks are relating to subjects.

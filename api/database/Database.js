@@ -19,14 +19,19 @@ class Database {
     static connect() {
         config.database === undefined ? config.database = 'openclass' : '';
         global.db = mysql.createConnection(config);
+        /**
+         * Register an event handler for errors
+         */
         global.db.on("error", error => {
             if (!error.fatal)
                 return;
+            // Exclude errors related to connection problems
             if (!['PROTOCOL_PACKETS_OUT_OF_ORDER', 'PROTOCOL_CONNECTION_LOST', 'ECONNREFUSED'].includes(error.code)) {
                 console.error(error);
             }
             console.log("Database connection lost or failed. Trying to reconnect in 10s...");
             setTimeout(() => {
+                // Retry the connection after 10 seconds
                 Database.connect();
             }, 10000);
         })
@@ -36,6 +41,7 @@ class Database {
                 return;
             }
             console.log("Connected!")
+            // Start the initializer when connection is established
             initializer();
         });
     }
@@ -44,13 +50,16 @@ class Database {
      * Initializes the database with the required tables by executing the SQL script.
      */
     static createTables() {
+        // Read the SQL statements from the template SQL file
         fs.readFile(dbStructurePath, "UTF-8", (err, data) => {
             console.log("Initializing database with required tables...");
             if (err) {
                 console.error(err);
                 console.error("Database structure file failed to load!");
             } else {
+                // If there is no database name set in the config, use openclass.
                 config.database === undefined ? config.database = 'openclass' : '';
+                // Replace all occurrences of openclass with the specified name
                 let script = data.replace(/openclass/g, config.database);
                 let settings = JSON.parse(JSON.stringify(config));
                 settings.multipleStatements = true;

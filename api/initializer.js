@@ -1,10 +1,25 @@
+/*
+ * Copyright (c) 2021 Lenny Angst. All rights reserved.
+ * For more information about the license read the LICENSE file at the root of this repo.
+ * Written for Project: openclass
+ * Last modified: 23.03.21, 18:47
+ */
+
+/**
+ * This file contains the initial loader which loads in all the data from the database.
+ */
+
 const Class = require('./entities/Class');
 const User = require('./entities/User');
 
 let connection;
 
+/**
+ * Initializes the global cache lists and fills them with data from the database.
+ * @returns {Promise<void>}
+ */
 module.exports = async function () {
-    console.log("Retrieving cache data from database...")
+    console.log("Retrieving data from database...")
     connection = global.db;
     global.users = {};
     global.classes = {};

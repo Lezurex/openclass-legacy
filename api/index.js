@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2021 Lenny Angst. All rights reserved.
+ * For more information about the license read the LICENSE file at the root of this repo.
+ * Written for Project: openclass
+ * Last modified: 23.03.21, 17:53
+ */
+
 const express = require("express");
 const path = require("path");
 const fs = require('fs');
@@ -9,6 +16,7 @@ const logger = require('morgan');
 const app = express(),
     port = 3080;
 
+// Configures the rate limiter as set in the config
 const limiter = new RateLimit({
     windowMs: config.rateLimit.timeWindow * 60 * 1000,
     max: config.rateLimit.maxRequests,
@@ -21,6 +29,7 @@ const limiter = new RateLimit({
 Database.createTables();
 
 const date = new Date();
+// Write an access log to the logs directory
 app.use(logger({
     stream: fs.createWriteStream("../logs/access-log-" + date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() + "-" + date.getHours() + "-" + date.getMinutes() + ".log", {flags: 'w'})
 }))
