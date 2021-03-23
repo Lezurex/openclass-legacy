@@ -4,12 +4,15 @@ module.exports = async (req, res) => {
     if (req.session.user.isAdmin) {
         let data = req.body;
         if (data.name) {
-            let permissions = {
-                addTasks: !!data.permissions.addTasks,
-                editTasks: !!data.permissions.editTasks,
-                deleteTasks: !!data.permissions.deleteTasks,
-                manageSubjects: !!data.permissions.manageSubjects
-            };
+            let permissions = {addTasks: false,editTasks: false,deleteTasks: false,manageSubjects: false};
+            if (data.permissions) {
+                permissions = {
+                    addTasks: !!data.permissions.addTasks,
+                    editTasks: !!data.permissions.editTasks,
+                    deleteTasks: !!data.permissions.deleteTasks,
+                    manageSubjects: !!data.permissions.manageSubjects
+                };
+            }
             let role = new Role(undefined, data.name, req.class, permissions);
             await role.saveToDB();
             req.class.roles[role.id] = role;
