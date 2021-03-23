@@ -24,7 +24,7 @@ module.exports = class Role {
     constructor(id, name, classObj, permissions) {
         this.id = id;
         this.name = name;
-        this.classObj = name;
+        this.classObj = classObj;
         this.permissions = permissions;
     }
 
@@ -74,14 +74,14 @@ module.exports = class Role {
     async saveToDB() {
         return new Promise(resolve => {
             if (this.id) {
-                global.db.query("UPDATE roles SET name=?,addTasks=?,deleteTasks=?,manageSubjects=?,FK_class=? WHERE id=?",
-                    [this.name, this.permissions.addTasks, this.permissions.deleteTasks, this.permissions.manageSubjects, this.class.id, this.id], err => {
+                global.db.query("UPDATE roles SET name=?,addTasks=?,editTasks=?,deleteTasks=?,manageSubjects=?,FK_class=? WHERE id=?",
+                    [this.name, this.permissions.addTasks, this.permissions.editTasks, this.permissions.deleteTasks, this.permissions.manageSubjects, this.classObj.id, this.id], err => {
                     if (err) console.error(err);
                     resolve();
                 })
             } else {
                 global.db.query("INSERT INTO roles(name, addTasks, editTasks, deleteTasks, manageSubjects, FK_class) VALUES (?,?,?,?,?,?)",
-                    [this.name, this.permissions.addTasks, this.permissions.deleteTasks, this.permissions.manageSubjects, this.class.id, this.id], (err, result) => {
+                    [this.name, this.permissions.addTasks, this.permissions.editTasks, this.permissions.deleteTasks, this.permissions.manageSubjects, this.classObj.id], (err, result) => {
                     if (err) console.error(err);
                     this.id = result.insertId;
                     global.roles[this.id] = this;
