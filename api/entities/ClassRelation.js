@@ -41,7 +41,7 @@ module.exports = class ClassRelation {
         obj.id = this.id;
         obj.class = this.class.id;
         obj.user = this.user.id;
-        obj.role = this.user.role;
+        this.role ? obj.role = this.role : obj.role = null;
         return obj;
     }
 
@@ -93,7 +93,7 @@ module.exports = class ClassRelation {
      * @returns {ClassRelation} Converted ClassRelation instance
      */
     static fromDatabaseObject(obj) {
-        let relation = new ClassRelation(parseInt(obj.id), global.classes[obj.FK_class + ''], global.users[obj.FK_user + ''], global.roles[obj.FK_role + '']);
+        let relation = new ClassRelation(obj.id, global.classes[obj.FK_class], global.users[obj.FK_user], global.roles[obj.FK_role]);
         global.classRelations[relation.id] = relation;
         return relation;
     }

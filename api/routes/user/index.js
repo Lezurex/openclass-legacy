@@ -11,6 +11,7 @@ const single = require('./single');
 const newUser = require("./newUser");
 const deleteUser = require('./deleteUser');
 const update = require('./update');
+const relations = require('./relations');
 
 user.param("userId", (req, res, next, value) => {
     let user = global.users[value];
@@ -24,6 +25,8 @@ user.param("userId", (req, res, next, value) => {
         });
     }
 })
+
+user.use('/:userId/relations', relations);
 
 user.get("/", all);
 user.get("/:userId", single)

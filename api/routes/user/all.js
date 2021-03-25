@@ -7,8 +7,10 @@
 
 module.exports = (req, res) => {
     let users = {};
-    for (let [key, user] of Object.entries(global.users)) {
-        users[key] = user.toJSON();
+    for (let user of Object.values(global.users)) {
+        let obj = user.toJSON();
+        delete obj.classRelations;
+        users[obj.id] = obj;
     }
     res.status(200).json(users);
 }
