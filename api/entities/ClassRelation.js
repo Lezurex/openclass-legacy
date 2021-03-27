@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 23.03.21, 17:19
+ * Last modified: 27.03.21, 23:56
  */
 
 /**
@@ -70,13 +70,14 @@ module.exports = class ClassRelation {
      */
     async saveToDB() {
         return new Promise(resolve => {
+            let roleId = this.role ? this.role.id : null;
             if (this.id) {
-                global.db.query("UPDATE classRelation SET FK_class=?,FK_user=?,FK_role=? WHERE id=?", [this.class.id, this.user.id, this.role.id, this.id], (err, result) => {
+                global.db.query("UPDATE classRelation SET FK_class=?,FK_user=?,FK_role=? WHERE id=?", [this.class.id, this.user.id, roleId, this.id], (err, result) => {
                     if (err) console.error(err);
                     resolve();
                 })
             } else {
-                global.db.query("INSERT INTO classRelation(FK_user, FK_class, FK_role) VALUES (?,?,?)", [this.user.id, this.class.id, this.role.id], (err, result) => {
+                global.db.query("INSERT INTO classRelation(FK_user, FK_class, FK_role) VALUES (?,?,?)", [this.user.id, this.class.id, roleId], (err, result) => {
                     if (err) console.error(err);
                     this.id = result.insertId;
                     global.classRelations[this.id] = this;
