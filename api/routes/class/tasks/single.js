@@ -2,12 +2,12 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 28.03.21, 14:32
+ * Last modified: 28.03.21, 20:39
  */
 
 module.exports = (req, res) => {
-    let task = req.task.toJSON();
+    let task = req.task.toJSON(req.session.user);
     // Adding subject details
-    task.subject = global.subjects[task.subject];
+    task.subject = global.subjects[task.subject].toJSON();
     res.status(200).json(task);
 }
