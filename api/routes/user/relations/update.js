@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 28.03.21, 00:00
+ * Last modified: 28.03.21, 00:01
  */
 
 module.exports = (req, res) => {
@@ -10,7 +10,6 @@ module.exports = (req, res) => {
         let data = req.body;
         if (Object.keys(data).includes('role')) {
             if (data.role) {
-                console.log(Object.keys(req.relation.class.roles));
                 if (Object.keys(req.relation.class.roles).includes(data.role + '')) {
                     req.relation.role = req.relation.class.roles[data.role];
                     req.relation.saveToDB();
