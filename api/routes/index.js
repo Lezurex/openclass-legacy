@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 23.03.21, 18:58
+ * Last modified: 28.03.21, 21:09
  */
 
 /**
@@ -21,6 +21,7 @@ const user = require("./user");
 const express = require("express");
 const config = require('./../../config/config.json');
 const classRouter = require('./class');
+const tasks = require('./tasks');
 
 // Middleware for session with secret configured in the config.
 routes.use(session({secret: config.session.secret, resave: false, saveUninitialized: false}));
@@ -51,5 +52,7 @@ routes.use("/class", classRouter);
 routes.get("/", (req, res) => {
     res.status(200).json({message: 'Connected!'});
 });
+
+routes.get('/tasks', tasks);
 
 module.exports = routes;
