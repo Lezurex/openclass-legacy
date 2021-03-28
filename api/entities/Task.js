@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 23.03.21, 17:19
+ * Last modified: 28.03.21, 20:37
  */
 
 const Tick = require('./Tick');
@@ -41,18 +41,23 @@ module.exports = class Task {
 
     /**
      * Converts the instance to a JSON object without circular values.
+     * @param user {User} If set the ticked status of this user will be returned.
      * @returns {{id:number,title:string,body:string,dueDate:string,subject:number,class:number}}
      * A simplified object of the instance. Class and subject are linked with its IDs. Date is formatted as ISO string.
      */
-    toJSON() {
-        return {
+    toJSON(user= undefined) {
+        let obj = {
             id: this.id,
             title: this.title,
             body: this.body,
             dueDate: this.dueDate.toISOString(),
             subject: this.subjectId,
             class: this.classId,
+        };
+        if (user) {
+            obj.ticked = !!Object.values(this.ticks).find(tick => tick.user.id === user.id);
         }
+        return obj;
     }
 
     /**
@@ -110,7 +115,7 @@ module.exports = class Task {
             global.classes[task.classId].tasks[task.id] = task;
             global.db.query("SELECT * FROM ticks WHERE FK_task=?", [task.id], (err, result) => {
                 for (let tickObj of result) {
-                    let tick = Tick.fromDatabaseObject(tickObj);
+                    let tick = Tick.fromDatabaseObject(tickObj, true);
                     task.ticks[tick.id] = tick;
                 }
                 resolve(task);

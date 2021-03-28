@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 22.03.21, 13:12
+ * Last modified: 28.03.21, 14:45
  */
 
 /**
@@ -28,4 +28,7 @@ function isInClass(user, classObj) {
     return !!relation;
 }
 
+/**
+ * @type {{hasPermission: (function(User, Class, String): boolean), isInClass: (function(User, Class): boolean)}}
+ */
 module.exports = {hasPermission: hasPermission, isInClass: isInClass}

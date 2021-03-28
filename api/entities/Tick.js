@@ -2,12 +2,13 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 23.03.21, 17:19
+ * Last modified: 28.03.21, 20:52
  */
 
 /**
  * Represents a tick of a user in a task.
  * @class Tick
+ * @constructor
  */
 module.exports = class Tick {
 
@@ -19,7 +20,7 @@ module.exports = class Tick {
      * Creates a new tick instance.
      * @param id {number} Unique identifier to quickly access the class inside the database
      * @param task {Task} Task to which this tick is related to
-     * @param user {User} The creator of this tick
+     * @param user {User|number} The creator of this tick
      */
     constructor(id, task, user) {
         this.id = id;
@@ -30,11 +31,15 @@ module.exports = class Tick {
     /**
      * Converts an entry from the database into an instance.
      * @param obj {{id:number,FK_task:number,FK_user:number}} Database entry object
+     * @param userAsId {boolean} Set to true in initialization. Ticks are loaded before users.
      * @returns {Tick} Converted tick instance
      * @async
      */
-    static fromDatabaseObject(obj) {
-        let tick = new Tick(obj.id, global.tasks[obj.FK_task], global.users[obj.FK_user]);
+    static fromDatabaseObject(obj, userAsId) {
+        let user = obj.FK_user;
+        if (!userAsId)
+            user = global.users[obj.FK_user];
+        let tick = new Tick(obj.id, global.tasks[obj.FK_task], user);
         global.ticks[tick.id] = tick;
         return tick;
     }
