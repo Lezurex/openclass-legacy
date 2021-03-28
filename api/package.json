@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/bundle.js",
-    "build": "webpack ./src/",
+    "build": "webpack .",
     "dev": "nodemon index.js localhost 3080"
   },
   "keywords": [],
