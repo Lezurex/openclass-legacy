@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 22.03.21, 07:49
+ * Last modified: 28.03.21, 13:40
  */
 
 module.exports = (req, res) => {
@@ -15,9 +15,7 @@ module.exports = (req, res) => {
                     code: 500
                 });
             } else {
-                res.status(200).json({
-                    status: "success"
-                })
+                res.status(204).send();
             }
         })
     } else {
