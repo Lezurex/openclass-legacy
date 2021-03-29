@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2021 Lenny Angst. All rights reserved.
+ * For more information about the license read the LICENSE file at the root of this repo.
+ * Written for Project: openclass
+ * Last modified: 29.03.21, 21:37
+ */
+
 module.exports = {
     devServer: {
         proxy: {
@@ -7,6 +14,7 @@ module.exports = {
             },
         }
     },
+
     chainWebpack: config => {
         config
             .plugin('html')
@@ -14,5 +22,7 @@ module.exports = {
                 args[0].title = "OpenClass";
                 return args;
             })
-    }
+    },
+
+    pluginOptions: {}
 }
