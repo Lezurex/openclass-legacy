@@ -5,3 +5,11 @@
 body {
     min-height: 100vh;
 }
+
+.input {
+    @apply dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition
+}
+
+.btn {
+    @apply transition bg-indigo-500 block border-gray-600 rounded p-2 shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+}
