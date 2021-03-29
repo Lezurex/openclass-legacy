@@ -4,12 +4,42 @@
 
 body {
     min-height: 100vh;
+    @apply text-gray-900 dark:text-gray-50;
+}
+
+.card {
+    @apply block dark:bg-gray-800 rounded p-10 shadow border-2 border-gray-200 dark:border-gray-600;
 }
 
 .input {
-    @apply dark:bg-gray-800 mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 transition
+    @apply
+    dark:bg-gray-800
+    dark:text-gray-50
+    mt-1.5
+    w-full
+    rounded-md
+    border-gray-200
+    dark:border-gray-600
+    shadow-sm
+    focus:border-indigo-300
+    focus:ring
+    focus:ring-indigo-200
+    focus:ring-opacity-50
+    transition
 }
 
 .btn {
-    @apply transition bg-indigo-500 block border-gray-600 rounded p-2 shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+    @apply
+    transition
+    text-gray-50
+    bg-indigo-500
+    block
+    border-gray-600
+    rounded
+    p-2
+    shadow-sm
+    focus:outline-none
+    focus:ring
+    focus:ring-indigo-200
+    focus:ring-opacity-50
 }

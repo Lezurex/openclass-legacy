@@ -1,15 +1,23 @@
 <template>
-  <main>
-    <div class="sm:container bg-gray-800 rounded p-10 shadow border-2 border-gray-600">
+  <main class="flex justify-center flex-nowrap flex-col">
+    <h1 class="text-center text-5xl block w-full">OpenClass</h1>
+    <div class="card mt-10">
       <label class="block mb-2">
-        <span>E-Mail</span>
-        <input placeholder="max.muserman@mustermail.de" class="input" type="email">
+        <span class="block">E-Mail</span>
+        <input placeholder="max.mustermann@mustermail.de" class="input" type="email">
       </label>
       <label class="block">
-        <span>Passwort</span>
+        <span class="block">Passwort</span>
         <input class="input" type="password">
       </label>
-      <button class="btn mt-3">Login</button>
+      <div class="flex mt-3 justify-between items-center">
+        <button class="btn">Login</button>
+        <span class="text-indigo-500 cursor-pointer">Passwort vergessen?</span>
+      </div>
+    </div>
+    <div class="fixed bottom-3 right-3">
+      <a class="bottom-link" href="https://github.com/Lezurex/openclass">GitHub</a>
+      <span class="bottom-link">Setup</span>
     </div>
   </main>
 </template>
@@ -35,7 +43,7 @@ main {
   align-items: center;
 }
 
-#login-div {
-  display: inline-block;
+.bottom-link {
+  @apply text-gray-700 hover:text-gray-500 cursor-pointer transition pl-2;
 }
 </style>
