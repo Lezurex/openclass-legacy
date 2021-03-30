@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 29.03.21, 21:27
+  - Last modified: 3/30/21, 1:58 PM
   -->
 
 <template>
@@ -11,14 +11,14 @@
     <div class="shadow-lg card mt-10">
       <label class="block mb-2">
         <span class="block">{{ $t('login.email') }}</span>
-        <input :placeholder="$t('login.email-sample')" class="input" type="email">
+        <input v-model="email" :placeholder="$t('login.email-sample')" class="input" type="email">
       </label>
       <label class="block">
         <span class="block">{{ $t('login.password') }}</span>
-        <input class="input" type="password">
+        <input v-model="password" class="input" type="password">
       </label>
       <div class="flex mt-3 justify-between items-center flex-wrap">
-        <button class="btn mr-2">{{ $t('login.btn-login') }}</button>
+        <button @click="login" class="btn mr-2">{{ $t('login.btn-login') }}</button>
         <span class="text-indigo-500 cursor-pointer">{{ $t('login.forgot-password-question') }}</span>
       </div>
     </div>
@@ -31,12 +31,21 @@
 
 <script>
 export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    }
+  },
   name: "Login",
   methods: {
-    async sendRequest() {
-      await fetch('/api/auth/status', {
-        method: "GET",
-      });
+    async login() {
+      if (this.email && this.password) {
+        let resp = await global.API.auth.login(this.email, this.password);
+        if (resp.status === "success") {
+          this.$router.push("/");
+        }
+      }
     }
   }
 }

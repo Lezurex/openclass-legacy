@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 23.03.21, 17:53
+ * Last modified: 3/30/21, 11:32 AM
  */
 
 const express = require("express");
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, '../webapp/dist')));
 // Bind all api routes to the endpoint
 app.use('/api', routes);
 
-app.get('/', (req,res) => {
+app.get('/*', (req,res) => {
     res.sendFile(path.join(__dirname, '../webapp/dist/index.html'));
 });
 
