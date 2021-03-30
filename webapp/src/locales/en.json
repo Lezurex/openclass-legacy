@@ -8,5 +8,8 @@
     "errors": {
       "wrong-credentials": "Email and/or password is incorrect!"
     }
+  },
+  "pages": {
+    "tasks": "Tasks"
   }
 }
