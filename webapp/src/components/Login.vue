@@ -10,16 +10,16 @@
     <h1 class="text-center text-5xl block w-full">OpenClass</h1>
     <div class="shadow-lg card mt-10">
       <label class="block mb-2">
-        <span class="block">{{ $t('email') }}</span>
-        <input placeholder="max.mustermann@mustermail.de" class="input" type="email">
+        <span class="block">{{ $t('login.email') }}</span>
+        <input :placeholder="$t('login.email-sample')" class="input" type="email">
       </label>
       <label class="block">
-        <span class="block">Passwort</span>
+        <span class="block">{{ $t('login.password') }}</span>
         <input class="input" type="password">
       </label>
       <div class="flex mt-3 justify-between items-center flex-wrap">
-        <button class="btn mr-2">Login</button>
-        <span class="text-indigo-500 cursor-pointer">Passwort vergessen?</span>
+        <button class="btn mr-2">{{ $t('login.btn-login') }}</button>
+        <span class="text-indigo-500 cursor-pointer">{{ $t('login.forgot-password-question') }}</span>
       </div>
     </div>
     <div class="fixed bottom-4 right-4">

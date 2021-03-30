@@ -9,20 +9,26 @@ import App from './App.vue';
 
 import './assets/tailwind.css';
 import "./assets/style.css";
-import Vue from 'vue';
-import i18next from "i18next";
-import VueI18Next from "@panter/vue-i18next";
-import Fetch from 'i18next-fetch-backend';
+import { createApp } from 'vue';
+import {loadLocaleMessages, setupI18n} from './i18n'
+import en from './locales/en.json'
 
-i18next.use(Fetch);
-i18next.init({
-    lng: 'en',
-    fallbackLng: 'en',
-    backend: {
-        loadPath: '/locales/{{lng}}/{{ns}}.json'
+const i18n = setupI18n({
+    globalInjection: true,
+    legacy: false,
+    locale: navigator.language,
+    fallbackLocale: 'en',
+    messages: {
+        en
     }
 });
 
-const i18n = new VueI18Next(i18next);
+defineLanguage();
 
-Vue.createApp(App).use(i18n).mount('#app')
+async function defineLanguage() {
+    for (let lang of navigator.languages) {
+        let loaded = await loadLocaleMessages(i18n, lang);
+        if (loaded) break;
+    }
+    createApp(App).use(i18n).mount('#app')
+}

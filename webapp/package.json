@@ -13,12 +13,10 @@
     "@tailwindcss/forms": "^0.3.2",
     "autoprefixer": "^9.8.6",
     "core-js": "^3.6.5",
-    "i18next": "^20.1.0",
-    "i18next-browser-languagedetector": "^6.1.0",
-    "i18next-fetch-backend": "^3.0.0",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-i18n": "^9.0.0"
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^2.0.0",
