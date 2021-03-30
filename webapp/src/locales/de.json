@@ -1,7 +1,7 @@
 {
   "login": {
     "email": "E-Mail",
-    "email-sample": "max.mustermann@mail.de",
+    "email-sample": "max.mustermann{'@'}mail.de",
     "password": "Passwort",
     "forgot-password-question": "Passwort vergessen?",
     "btn-login": "Einloggen"

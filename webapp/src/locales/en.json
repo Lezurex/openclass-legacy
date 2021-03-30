@@ -1,7 +1,7 @@
 {
   "login": {
     "email": "Email",
-    "email-sample": "peter.sample@sample.com",
+    "email-sample": "peter.sample{'@'}sample.com",
     "password": "Password",
     "forgot-password-question": "Forgot password?",
     "btn-login": "Log in"

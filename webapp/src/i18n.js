@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 8:12 AM
+ * Last modified: 3/30/21, 11:24 AM
  */
 // From https://github.com/intlify/vue-i18n-next/blob/master/examples/lazy-loading/webpack/src/i18n.js
 import { nextTick } from 'vue'
@@ -41,7 +41,7 @@ export async function loadLocaleMessages(i18n, locale) {
         // set locale and locale message
         i18n.global.setLocaleMessage(locale, messages.default)
     } catch (e) {
-        console.error(e);
+        console.log("Locale '" + locale + "' is not available.");
         return false;
     }
 

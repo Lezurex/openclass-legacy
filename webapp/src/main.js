@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 29.03.21, 21:39
+ * Last modified: 3/30/21, 10:14 AM
  */
 
 import App from './App.vue';
@@ -12,6 +12,7 @@ import "./assets/style.css";
 import { createApp } from 'vue';
 import {loadLocaleMessages, setupI18n} from './i18n'
 import en from './locales/en.json'
+import APIManager from "@/api/APIManager";
 
 const i18n = setupI18n({
     globalInjection: true,
@@ -22,6 +23,9 @@ const i18n = setupI18n({
         en
     }
 });
+
+const API = new APIManager();
+API.auth.login("max.mustermann@mustermail.de", "Musterpasswort123!");
 
 defineLanguage();
 
