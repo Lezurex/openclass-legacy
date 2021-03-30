@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 2:29 PM
+ * Last modified: 3/30/21, 3:35 PM
  */
 
 import App from './App.vue';
@@ -26,7 +26,6 @@ const i18n = setupI18n({
 });
 
 global.API = new APIManager();
-global.API.auth.getStatus();
 
 defineLanguage();
 
@@ -38,5 +37,6 @@ async function defineLanguage() {
             break;
         }
     }
+    await global.API.auth.getStatus();
     createApp(App).use(router).use(i18n).mount('#app');
 }

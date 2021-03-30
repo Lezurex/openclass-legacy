@@ -4,6 +4,9 @@
     "email-sample": "max.mustermann{'@'}mail.de",
     "password": "Passwort",
     "forgot-password-question": "Passwort vergessen?",
-    "btn-login": "Einloggen"
+    "btn-login": "Einloggen",
+    "errors": {
+      "wrong-credentials": "E-Mail und/oder Passwort ist falsch!"
+    }
   }
 }

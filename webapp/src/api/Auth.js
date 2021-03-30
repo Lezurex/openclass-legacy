@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 2:00 PM
+ * Last modified: 3/30/21, 2:52 PM
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
@@ -28,11 +28,10 @@ export default class Auth extends RequestExecutor {
                 if (this.isSuccessful(xhr.status)) {
                     resolve(resp);
                 } else {
-                    let error = JSON.parse(xhr.responseText);
-                    if (error.code === 1011) {
+                    if (resp.code === 1011) {
                         resolve(resp);
                     } else {
-                        reject(resp);
+                        resolve(resp);
                     }
                 }
             });

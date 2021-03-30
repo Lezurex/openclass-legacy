@@ -4,6 +4,9 @@
     "email-sample": "peter.sample{'@'}sample.com",
     "password": "Password",
     "forgot-password-question": "Forgot password?",
-    "btn-login": "Log in"
+    "btn-login": "Log in",
+    "errors": {
+      "wrong-credentials": "Email and/or password is incorrect!"
+    }
   }
 }
