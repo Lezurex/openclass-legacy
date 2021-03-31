@@ -1,4 +1,4 @@
-# Openclass
+# 📖Openclass
 Webapp for writing down assignments for the whole class.
 
 This is the future successor of the [Klassenspiegel](https://github.com/Lezurex/Klassenspiegel).
@@ -7,12 +7,12 @@ This Node.js webapp provides an easy and simple way to write down assignments an
 
 **This project is currently still under development!**
 
-## API
+## 👨‍💻API
 Openclass works with a full-fledged REST-API under the hood. If you like to, you could code your own frontend for Openclass!
 
 For furhter information about the API and how to use it [check out the API docs](https://documenter.getpostman.com/view/14611967/TzCL7njV).
 
-## Internationalization
+## 🌐Internationalization
 The frontend is fully translatable. Currently available languages are:
 - 🇬🇧 English
 - 🇩🇪 German
