@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/1/21, 11:07 AM
+  - Last modified: 4/1/21, 4:22 PM
   -->
 
 <template>
@@ -24,7 +24,7 @@
         <span class="text-indigo-500 cursor-pointer">{{ $t('login.forgot-password-question') }}</span>
       </div>
     </div>
-    <div class="fixed bottom-4 right-4">
+    <div class="absolute bottom-4 right-4">
       <a class="bottom-link" href="https://github.com/Lezurex/openclass">GitHub</a>
       <span class="bottom-link">Setup</span>
     </div>

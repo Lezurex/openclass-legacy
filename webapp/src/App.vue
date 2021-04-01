@@ -2,10 +2,13 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/1/21, 11:15 AM
+  - Last modified: 4/1/21, 5:44 PM
   -->
 
 <template>
+  <ul class="fixed bottom-5 right-5 z-10">
+    <notification v-for="notification of notifications" :key="notification" :notification="notification"></notification>
+  </ul>
   <div class="flex">
     <navbar v-if="loggedIn"></navbar>
     <router-view class="flex-grow p-4" :class="loggedIn ? 'nav-inset' : null"/>
@@ -14,12 +17,14 @@
 
 <script>
 import Navbar from "@/components/Navbar";
-import {watch} from "@vue/runtime-core";
+import Notification from "@/components/Notification";
+import NotificationObj from '@/utils/Notification';
 
 export default {
   data() {
     return {
-      loggedIn: global.API.auth.loggedIn
+      loggedIn: global.API.auth.loggedIn,
+      notifications: global.notificationManager.notifications,
     }
   },
   mounted() {
@@ -30,9 +35,14 @@ export default {
       this.$router.push('/tasks');
       console.log("Logged in");
     }
+    new NotificationObj("FEHLER", "Was hast du angestellt?", NotificationObj.TYPE.error);
+    new NotificationObj("INFO", "hihihih", NotificationObj.TYPE.info);
+    new NotificationObj("ERFOLG", "Du hast etwas bemerkenswertes erreicht!", NotificationObj.TYPE.success);
+
   },
   components: {
-    Navbar
+    Navbar,
+    Notification
   }
 }
 </script>

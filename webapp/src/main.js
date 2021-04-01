@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 3:35 PM
+ * Last modified: 4/1/21, 3:28 PM
  */
 
 import App from './App.vue';
@@ -14,6 +14,7 @@ import {loadLocaleMessages, setI18nLanguage, setupI18n} from './i18n'
 import en from './locales/en.json'
 import APIManager from "@/api/APIManager";
 import router from './router'
+import NotificationManager from "@/utils/NotificationManager";
 
 const i18n = setupI18n({
     globalInjection: true,
@@ -26,6 +27,7 @@ const i18n = setupI18n({
 });
 
 global.API = new APIManager();
+global.notificationManager = new NotificationManager();
 
 defineLanguage();
 
