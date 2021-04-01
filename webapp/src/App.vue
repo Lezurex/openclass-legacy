@@ -2,12 +2,12 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/1/21, 5:44 PM
+  - Last modified: 01.04.21, 21:49
   -->
 
 <template>
-  <ul class="fixed bottom-5 right-5 z-10">
-    <notification v-for="notification of notifications" :key="notification" :notification="notification"></notification>
+  <ul class="fixed bottom-5 right-5 z-10 overflow-y-scroll max-h-full notification-list max-w-sm">
+    <notification v-for="notification of notifications" :key="notification.id" :notification="notification"></notification>
   </ul>
   <div class="flex">
     <navbar v-if="loggedIn"></navbar>
@@ -30,15 +30,9 @@ export default {
   mounted() {
     if (!global.API.auth.isLoggedIn()) {
       this.$router.push("/login");
-      console.log("Not logged in");
     } else {
       this.$router.push('/tasks');
-      console.log("Logged in");
     }
-    new NotificationObj("FEHLER", "Was hast du angestellt?", NotificationObj.TYPE.error);
-    new NotificationObj("INFO", "hihihih", NotificationObj.TYPE.info);
-    new NotificationObj("ERFOLG", "Du hast etwas bemerkenswertes erreicht!", NotificationObj.TYPE.success);
-
   },
   components: {
     Navbar,
@@ -59,6 +53,10 @@ export default {
   .nav-inset {
     margin-bottom: 5rem;
   }
+}
+
+.notification-list::-webkit-scrollbar {
+  display: none;
 }
 
 </style>

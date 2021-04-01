@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/1/21, 4:22 PM
+  - Last modified: 01.04.21, 21:54
   -->
 
 <template>
@@ -17,7 +17,6 @@
         <span class="block">{{ $t('login.password') }}</span>
         <input v-model="password" @keyup.enter="login" class="input" type="password">
       </label>
-      <p class="text-red-700 mt-3 transition dark:text-red-500">{{ error ? $t(error) : '' }}</p>
       <div class="flex mt-3 justify-between items-center flex-wrap">
         <button v-if="!loginPending" @click="login" class="btn mr-2">{{ $t('login.btn-login') }}</button>
         <button disabled v-else class="btn opacity-70 mr-2"><i class="fas fa-spinner spinner"></i></button>
@@ -32,13 +31,14 @@
 </template>
 
 <script>
+import Notification from "@/utils/Notification";
+
 export default {
   data() {
     return {
       email: "",
       password: "",
       loginPending: false,
-      error: ""
     }
   },
   name: "Login",
@@ -50,10 +50,11 @@ export default {
         if (resp === null) {
           this.$router.push("/tasks");
           global.API.auth.getStatus();
+          new Notification(this.$t("login.success-title"), this.$t("login.success-desc"), Notification.TYPE.success, 200);
         } else {
           switch (resp.code) {
             case 1012: // Wrong credentials
-            this.error = 'login.errors.wrong-credentials';
+              new Notification(this.$t("login.errors.wrong-credentials-title"), this.$t("login.errors.wrong-credentials-desc"), Notification.TYPE.error);
           }
         }
         this.loginPending = false;

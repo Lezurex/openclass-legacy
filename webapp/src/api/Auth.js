@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/1/21, 11:14 AM
+ * Last modified: 01.04.21, 17:51
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
@@ -26,6 +26,7 @@ export default class Auth extends RequestExecutor {
                 } catch (e) {
                     resp = null;
                 }
+                this.getStatus();
                 if (this.isSuccessful(xhr.status)) {
                     resolve(resp);
                 } else {

@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/1/21, 3:28 PM
+ * Last modified: 01.04.21, 21:27
  */
 
 import App from './App.vue';
@@ -28,6 +28,7 @@ const i18n = setupI18n({
 
 global.API = new APIManager();
 global.notificationManager = new NotificationManager();
+global.i18n = i18n;
 
 defineLanguage();
 

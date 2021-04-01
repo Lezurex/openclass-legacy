@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/1/21, 4:16 PM
+ * Last modified: 01.04.21, 21:04
  */
 
 import {ref} from "vue";
@@ -20,7 +20,7 @@ export default class NotificationManager {
     }
 
     remove(notification) {
-        delete this.notifications.value[this.notifications.value.indexOf(notification)];
+        this.notifications.value = this.notifications.value.filter(candidate => candidate.id !== notification.id);
     }
 
 }

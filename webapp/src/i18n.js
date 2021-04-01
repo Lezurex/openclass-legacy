@@ -2,10 +2,8 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 2:28 PM
+ * Last modified: 01.04.21, 21:38
  */
-// From https://github.com/intlify/vue-i18n-next/blob/master/examples/lazy-loading/webpack/src/i18n.js
-import {nextTick} from 'vue'
 import {createI18n} from 'vue-i18n'
 
 export const SUPPORT_LOCALES = ['en', 'ja']
@@ -22,22 +20,12 @@ export function setI18nLanguage(i18n, locale) {
     } else {
         i18n.global.locale.value = locale
     }
-    /**
-     * NOTE:
-     * If you need to specify the language setting for headers, such as the `fetch` API, set it here.
-     * The following is an example for axios.
-     *
-     * axios.defaults.headers.common['Accept-Language'] = locale
-     */
     document.querySelector('html').setAttribute('lang', locale)
 }
 
 export async function loadLocaleMessages(i18n, locale) {
     return new Promise(resolve => {
-        import(
-            /* webpackChunkName: "locale-[request]" */ `./locales/${locale}.json`
-            ).then(messages => {
-            // set locale and locale message
+        import( `./locales/${locale}.json`).then(messages => {
             i18n.global.setLocaleMessage(locale, messages.default);
             console.log("Loaded locale " + locale);
             resolve(true);
