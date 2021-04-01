@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 3/30/21, 3:48 PM
+  - Last modified: 4/1/21, 11:07 AM
   -->
 
 <template>
@@ -49,6 +49,7 @@ export default {
         let resp = await global.API.auth.login(this.email, this.password);
         if (resp === null) {
           this.$router.push("/tasks");
+          global.API.auth.getStatus();
         } else {
           switch (resp.code) {
             case 1012: // Wrong credentials

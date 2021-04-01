@@ -2,14 +2,15 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 2:52 PM
+ * Last modified: 4/1/21, 11:14 AM
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
+import {ref} from 'vue';
 
 export default class Auth extends RequestExecutor {
 
-    loggedIn = false;
+    loggedIn = ref(false);
 
     async login(email, password) {
         return new Promise((resolve, reject) => {
@@ -44,11 +45,15 @@ export default class Auth extends RequestExecutor {
             let xhr = this.buildXHR("auth", "GET");
             xhr.addEventListener("load", ev => {
                 let resp = JSON.parse(xhr.responseText);
-                this.loggedIn = resp.loggedIn;
-                resolve(this.loggedIn);
+                this.loggedIn.value = resp.loggedIn;
+                resolve(this.loggedIn.value);
             });
             xhr.send();
         })
+    }
+
+    isLoggedIn() {
+        return this?.loggedIn.value;
     }
 
 }
