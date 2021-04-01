@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 29.03.21, 21:39
+ * Last modified: 01.04.21, 21:27
  */
 
 import App from './App.vue';
@@ -10,25 +10,36 @@ import App from './App.vue';
 import './assets/tailwind.css';
 import "./assets/style.css";
 import { createApp } from 'vue';
-import {loadLocaleMessages, setupI18n} from './i18n'
+import {loadLocaleMessages, setI18nLanguage, setupI18n} from './i18n'
 import en from './locales/en.json'
+import APIManager from "@/api/APIManager";
+import router from './router'
+import NotificationManager from "@/utils/NotificationManager";
 
 const i18n = setupI18n({
     globalInjection: true,
     legacy: false,
-    locale: navigator.language,
     fallbackLocale: 'en',
     messages: {
         en
-    }
+    },
+    silentFallbackWarn: true
 });
+
+global.API = new APIManager();
+global.notificationManager = new NotificationManager();
+global.i18n = i18n;
 
 defineLanguage();
 
 async function defineLanguage() {
     for (let lang of navigator.languages) {
         let loaded = await loadLocaleMessages(i18n, lang);
-        if (loaded) break;
+        if (loaded) {
+            setI18nLanguage(i18n, lang);
+            break;
+        }
     }
-    createApp(App).use(i18n).mount('#app')
+    await global.API.auth.getStatus();
+    createApp(App).use(router).use(i18n).mount('#app');
 }

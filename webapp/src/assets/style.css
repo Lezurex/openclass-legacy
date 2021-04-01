@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 29.03.21, 21:15
+ * Last modified: 3/30/21, 2:47 PM
  */
 
 :root {
@@ -49,4 +49,10 @@ body {
     focus:ring
     focus:ring-indigo-200
     focus:ring-opacity-50
+}
+
+.spinner {
+    @apply
+    p-1
+    animate-spin
 }

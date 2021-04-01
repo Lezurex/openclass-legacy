@@ -1,9 +1,23 @@
 {
   "login": {
     "email": "E-Mail",
-    "email-sample": "max.mustermann@mail.de",
+    "email-sample": "max.mustermann{'@'}mail.de",
     "password": "Passwort",
     "forgot-password-question": "Passwort vergessen?",
-    "btn-login": "Einloggen"
+    "btn-login": "Einloggen",
+    "success-title": "Eingeloggt",
+    "success-desc": "Du wurdest erfolgreich angemeldet!",
+    "errors": {
+      "wrong-credentials-title": "Falsche Anmeldedaten",
+      "wrong-credentials-desc": "E-Mail und/oder Passwort ist falsch!"
+    }
+  },
+  "pages": {
+    "tasks": "Aufgaben",
+    "classes": "Klassen"
+  },
+  "errors": {
+    "429-title": "Zu viele Anfragen",
+    "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!"
   }
 }

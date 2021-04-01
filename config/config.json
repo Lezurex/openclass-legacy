@@ -1,7 +1,7 @@
 {
   "rateLimit": {
     "timeWindow": 5,
-    "maxRequests": 100
+    "maxRequests": 200
   },
   "database": {
     "host": "localhost",

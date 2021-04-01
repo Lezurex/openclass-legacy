@@ -11,17 +11,21 @@
     "@panter/vue-i18next": "^0.15.2",
     "@popperjs/core": "^2.9.1",
     "@tailwindcss/forms": "^0.3.2",
+    "@vue/runtime-core": "^3.0.10",
     "autoprefixer": "^9.8.6",
     "core-js": "^3.6.5",
+    "icon.place": "^1.0.3",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
     "vue": "^3.0.0",
-    "vue-i18n": "^9.0.0"
+    "vue-i18n": "^9.0.0",
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^2.0.0",
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-eslint": "^4.5.12",
+    "@vue/cli-plugin-router": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
@@ -40,7 +44,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",
