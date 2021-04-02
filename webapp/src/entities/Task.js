@@ -26,8 +26,12 @@ export default class Task {
     }
 
     static async fromJSON(obj) {
-        if (!obj.subject.id in Object.keys(global.subjects)) {
+        return new Promise(resolve => {
+            if (obj.subject.id in Object.keys(global.subjects)) {
 
-        }
+            } else {
+
+            }
+        })
     }
 }
