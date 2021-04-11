@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 02.04.21, 10:38
+  - Last modified: 10.04.21, 00:28
   -->
 
 <template>
@@ -18,7 +18,7 @@
 export default {
   data() {
     return {
-      tasks: global.tasks
+      tasks: global.API.tasks.tasks
     }
   },
   mounted() {
