@@ -48,6 +48,7 @@ export default {
         this.loginPending = true;
         let resp = await global.API.auth.login(this.email, this.password);
         if (resp === null) {
+          await this.$store.dispatch("classes/loadClasses");
           this.$router.push("/tasks");
           global.API.auth.getStatus();
           new Notification(this.$t("login.success-title"), this.$t("login.success-desc"), Notification.TYPE.success, 200);

@@ -5,23 +5,23 @@
  * Last modified: 10.04.21, 00:37
  */
 
-export default class Task {
+export class Task {
 
     id;
     title;
     body;
     dueDate;
-    subjectId;
-    classId;
+    subject;
+    classObj;
     ticked;
 
-    constructor(id, title, body, dueDate, subjectId, classId, ticked) {
+    constructor(id, title, body, dueDate, subject, classObj, ticked) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.dueDate = dueDate;
-        this.subjectId = subjectId;
-        this.classId = classId;
+        this.subject = subject;
+        this.classObj = classObj;
         this.ticked = ticked;
     }
 

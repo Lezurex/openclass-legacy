@@ -6,9 +6,10 @@
  */
 
 module.exports = (req, res) => {
+    let deep = req.query.deep === "1";
     let classes = {};
     for (let [key, classObj] of Object.entries(global.classes)) {
-        classes[key] = classObj.toJSON();
+        classes[key] = classObj.toJSON(deep, req.session.user);
     }
     res.status(200).json(classes);
 }

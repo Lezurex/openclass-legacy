@@ -5,11 +5,12 @@
  * Last modified: 11.04.21, 21:35
  */
 
-import {createStore} from "vuex";
+import {createStore, createLogger} from "vuex";
 import classes from './modules/classes';
 
 export default createStore({
     modules: {
         classes
-    }
+    },
+    plugins: [createLogger()]
 })

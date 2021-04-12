@@ -43,18 +43,27 @@ module.exports = class Class {
      * @returns {{id:number,name:string,subjects:[number],roles:[number],tasks:[number]}}
      * A simplified object of the instance. Subjects, roles and tasks are linked with their IDs.
      */
-    toJSON() {
+    toJSON(deep = false, user = undefined) {
         let subjects = [];
         for (let subject of Object.values(this.subjects)) {
-            subjects.push(subject.id);
+            if (deep)
+                subjects.push(subject.toJSON())
+            else
+                subjects.push(subject.id);
         }
         let roles = [];
         for (let role of Object.values(this.roles)) {
-            roles.push(role.id);
+            if (deep)
+                roles.push(role.toJSON())
+            else
+                roles.push(role.id);
         }
         let tasks = [];
         for (let task of Object.values(this.tasks)) {
-            tasks.push(task.id);
+            if (deep)
+                tasks.push(task.toJSON(user));
+            else
+                tasks.push(task.id);
         }
         let obj = {};
         obj.id = this.id;

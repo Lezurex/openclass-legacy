@@ -12,12 +12,14 @@
       "wrong-credentials-desc": "Email and/or password is incorrect! Try again!"
     }
   },
-  "pages": {
-    "tasks": "Tasks",
-    "classes": "Classes"
-  },
   "errors": {
     "429-title": "Too Many Requests",
     "429-desc": "You performed too many actions! Please slow down and try again later!"
+  },
+  "tasks": {
+    "title": "Tasks & Exams"
+  },
+  "classes": {
+    "title": "Classes"
   }
 }

@@ -45,7 +45,7 @@ module.exports = class Task {
      * @returns {{id:number,title:string,body:string,dueDate:string,subject:number,class:number}}
      * A simplified object of the instance. Class and subject are linked with its IDs. Date is formatted as ISO string.
      */
-    toJSON(user= undefined) {
+    toJSON(user = undefined) {
         let obj = {
             id: this.id,
             title: this.title,

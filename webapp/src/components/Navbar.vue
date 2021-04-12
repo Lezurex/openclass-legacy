@@ -18,13 +18,13 @@
         <li class="sidenav-item">
           <router-link class="sidenav-link" to="/tasks">
             <i class="fas fa-book"></i>
-            <span class="link-text">{{ $t('pages.tasks') }}</span>
+            <span class="link-text">{{ $t('tasks.title') }}</span>
           </router-link>
         </li>
         <li class="sidenav-item">
           <router-link class="sidenav-link" to="/classes">
             <i class="fas fa-graduation-cap"></i>
-            <span class="link-text">{{ $t('pages.classes') }}</span>
+            <span class="link-text">{{ $t('classes.title') }}</span>
           </router-link>
         </li>
       </ul>
@@ -77,7 +77,7 @@ export default {
 }
 
 .link-text {
-  @apply hidden ml-4;
+  @apply hidden whitespace-nowrap overflow-hidden;
 }
 
 .sidenav-link i {

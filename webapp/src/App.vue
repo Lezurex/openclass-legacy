@@ -11,7 +11,7 @@
   </ul>
   <div class="flex">
     <navbar v-if="loggedIn"></navbar>
-    <router-view class="flex-grow p-4" :class="loggedIn ? 'nav-inset' : null"/>
+    <router-view class="flex-grow p-4" :class="loggedIn ? 'nav-inset' : null" v-if="loaded"/>
   </div>
 </template>
 
@@ -24,13 +24,19 @@ export default {
     return {
       loggedIn: global.API.auth.loggedIn,
       notifications: global.notificationManager.notifications,
+      loaded: false
     }
   },
   mounted() {
     if (!global.API.auth.isLoggedIn()) {
       this.$router.push("/login");
+      this.loaded = true;
     } else {
-      this.$router.push('/tasks');
+      this.$store.dispatch("classes/loadClasses").then(() => {
+        console.log("Classes loaded")
+        this.loaded = true;
+        this.$router.push('/tasks');
+      });
     }
   },
   components: {

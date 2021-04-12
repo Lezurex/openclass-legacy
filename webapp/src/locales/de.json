@@ -19,5 +19,11 @@
   "errors": {
     "429-title": "Zu viele Anfragen",
     "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!"
+  },
+  "tasks": {
+    "title": "Aufgaben & Prüfungen"
+  },
+  "classes": {
+    "title": "Klassen"
   }
 }

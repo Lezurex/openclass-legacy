@@ -56,3 +56,9 @@ body {
     p-1
     animate-spin
 }
+
+.heading {
+    @apply
+    text-3xl
+    font-bold
+}

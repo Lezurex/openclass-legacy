@@ -7,7 +7,7 @@
 
 <template>
 <main>
-  <h1>TASKS juhu</h1>
+  <h1 class="heading">{{ $t("tasks.title") }}</h1>
   <ul>
     <li v-for="task of tasks" :key="task.id">{{task.title}}</li>
   </ul>
@@ -15,18 +15,20 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
-      tasks: global.API.tasks.tasks
+      tasks: this.$store.getters['classes/getAllTasks']
     }
   },
   mounted() {
-    global.API.tasks
+    //console.log(this.tasks)
   },
   computed: {
     sorted() {
-      return Object.values(this.tasks).sort((a, b) => {
+      // [...this.tasks]: Clone the array without reference
+      return [...this.tasks].sort((a, b) => {
         return new Date(b.dueDate) - new Date(a.date);
       })
     }
