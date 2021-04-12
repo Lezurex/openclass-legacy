@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 2:47 PM
+ * Last modified: 12.04.21, 20:22
  */
 
 :root {
@@ -51,14 +51,24 @@ body {
     focus:ring-opacity-50
 }
 
+.checkbox {
+    @apply rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50;
+}
+
 .spinner {
     @apply
     p-1
     animate-spin
 }
 
-.heading {
+h1.heading {
     @apply
     text-3xl
+    font-bold
+}
+
+h2.heading {
+    @apply
+    text-2xl
     font-bold
 }

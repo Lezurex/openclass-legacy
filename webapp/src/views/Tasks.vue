@@ -2,47 +2,62 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 10.04.21, 00:28
+  - Last modified: 12.04.21, 21:53
   -->
 
 <template>
 <main>
   <h1 class="heading">{{ $t("tasks.title") }}</h1>
-  <ul>
-    <task-element v-for="task of tasks" :key="task.id" :task="task" :collapse-trigger="collapseTrigger" @collapse-all="collapseAll"></task-element>
-  </ul>
+  <div class="flex mt-5">
+    <ul class="flex-grow">
+      <task-element v-for="task of sortedFiltered(showTicked ? 0 : 1)" :key="task.id" :task="task" @click="selectTask(task, $event)"></task-element>
+    </ul>
+    <task-details v-if="selectedTask" :task="selectedTask" @close-window="selectedTask = null"></task-details>
+  </div>
+  <span class="text-gray-500 mt-3 block cursor-pointer" @click="showTicked = !showTicked">{{ showTicked ? $t("tasks.hideTicked") : $t("tasks.showTicked") }}</span>
 </main>
 </template>
 
 <script>
 
 import TaskElement from "@/components/TaskElement";
+import TaskDetails from "@/components/TaskDetails";
 
 export default {
   data() {
     return {
       tasks: this.$store.getters['classes/getAllTasks'],
-      collapseTrigger: 0
+      selectedTask: null,
+      showTicked: false
     }
   },
   mounted() {
     //console.log(this.tasks)
   },
   methods: {
-    collapseAll() {
-      this.collapseTrigger++;
-    }
-  },
-  computed: {
-    sorted() {
+    selectTask(task, event) {
+      this.selectedTask = task;
+    },
+    /**
+     * Applies some filters to tasks
+     * @param filterTicked {Number} 0: no filter 1: only ticked 2: only not-ticked
+     * @returns {*[]}
+     */
+    sortedFiltered(filterTicked = 0) {
       // [...this.tasks]: Clone the array without reference
-      return [...this.tasks].sort((a, b) => {
+      let tasks = [...this.tasks].sort((a, b) => {
         return new Date(b.dueDate) - new Date(a.date);
-      })
+      });
+      if (filterTicked === 1)
+        tasks = tasks.filter(item => !item.ticked)
+      if (filterTicked === 2)
+        tasks = tasks.filter(item => item.ticked)
+      return tasks;
     }
   },
   components: {
-    "taskElement": TaskElement
+    "taskElement": TaskElement,
+    "taskDetails": TaskDetails
   },
   name: "Tasks"
 }

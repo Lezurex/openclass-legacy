@@ -21,9 +21,34 @@
     "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!"
   },
   "tasks": {
-    "title": "Aufgaben & Prüfungen"
+    "title": "Aufgaben & Prüfungen",
+    "subject": "Fach",
+    "date": "Datum",
+    "desc": "Beschreibung",
+    "showTicked": "Abgehäkelte Aufgaben zeigen",
+    "hideTicked": "Abgehäkelte Aufgaben verstecken"
   },
   "classes": {
     "title": "Klassen"
+  },
+  "dateFormat": {
+    "middle": {
+      "year": "numeric",
+      "month": "numeric",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    },
+    "long": {
+      "year": "numeric",
+      "month": "long",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    }
   }
 }

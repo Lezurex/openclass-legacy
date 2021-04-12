@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 11.04.21, 21:34
+ * Last modified: 12.04.21, 18:52
  */
 
 import {Class} from "@/entities/Class";
@@ -14,8 +14,6 @@ const state = () => ({
 const getters = {
     getAllTasks(state) {
         let tasks = [];
-        console.log("All tasks")
-        console.log(state.all)
         Object.values(state.all).forEach(cObj => Object.values(cObj.tasks).forEach(task => tasks.push(task)))
         return tasks;
     }
@@ -41,6 +39,24 @@ const actions = {
             });
             req.send();
         })
+    },
+    async setTaskTick(context, payload) {
+        let task = payload[0];
+        let value = payload[1];
+        return new Promise((resolve, reject) => {
+            let req = new XMLHttpRequest();
+            req.open(value ? 'POST' : 'DELETE', window.location.origin + "/api/class/" + task.classObj.id + "/tasks/" + task.id + "/tick")
+            req.addEventListener("load", () => {
+                if (req.status === 204) {
+                    context.commit("setTaskTick", [task, value]);
+                    resolve();
+                } else {
+                    context.commit("setTaskTick", [task, !value]);
+                    reject();
+                }
+            });
+            req.send();
+        })
     }
 }
 
@@ -52,6 +68,9 @@ const mutations = {
      */
     setClasses(state, classes) {
         state.all = classes;
+    },
+    setTaskTick(state, payload) {
+        state.all[payload[0].classObj.id].tasks[payload[0].id].ticked = payload[1];
     }
 }
 

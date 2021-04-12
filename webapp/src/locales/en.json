@@ -17,9 +17,34 @@
     "429-desc": "You performed too many actions! Please slow down and try again later!"
   },
   "tasks": {
-    "title": "Tasks & Exams"
+    "title": "Tasks & Exams",
+    "subject": "Subject",
+    "date": "Date",
+    "desc": "Description",
+    "showTicked": "Show ticked tasks",
+    "hideTicked": "Hide ticked tasks"
   },
   "classes": {
     "title": "Classes"
+  },
+  "dateFormat": {
+    "middle": {
+      "year": "numeric",
+      "month": "numeric",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": true
+    },
+    "long": {
+      "year": "numeric",
+      "month": "long",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": true
+    }
   }
 }
