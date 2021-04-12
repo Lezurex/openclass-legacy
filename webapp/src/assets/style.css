@@ -40,7 +40,7 @@ body {
     transition
     text-gray-50
     bg-indigo-500
-    block
+    inline-block
     border-gray-600
     rounded
     p-2

@@ -9,21 +9,29 @@
 <main>
   <h1 class="heading">{{ $t("tasks.title") }}</h1>
   <ul>
-    <li v-for="task of tasks" :key="task.id">{{task.title}}</li>
+    <task-element v-for="task of tasks" :key="task.id" :task="task" :collapse-trigger="collapseTrigger" @collapse-all="collapseAll"></task-element>
   </ul>
 </main>
 </template>
 
 <script>
 
+import TaskElement from "@/components/TaskElement";
+
 export default {
   data() {
     return {
-      tasks: this.$store.getters['classes/getAllTasks']
+      tasks: this.$store.getters['classes/getAllTasks'],
+      collapseTrigger: 0
     }
   },
   mounted() {
     //console.log(this.tasks)
+  },
+  methods: {
+    collapseAll() {
+      this.collapseTrigger++;
+    }
   },
   computed: {
     sorted() {
@@ -32,6 +40,9 @@ export default {
         return new Date(b.dueDate) - new Date(a.date);
       })
     }
+  },
+  components: {
+    "taskElement": TaskElement
   },
   name: "Tasks"
 }

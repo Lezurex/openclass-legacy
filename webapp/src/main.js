@@ -30,7 +30,6 @@ const i18n = setupI18n({
 global.API = new APIManager();
 global.notificationManager = new NotificationManager();
 global.i18n = i18n;
-global.API.tasks.getAllTasks();
 
 defineLanguage();
 
