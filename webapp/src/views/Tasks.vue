@@ -2,14 +2,18 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/13/21, 8:51 AM
+  - Last modified: 4/13/21, 11:33 AM
   -->
 
 <template>
-<main>
+<main class="min-h-screen flex flex-col">
   <h1 class="heading">{{ $t("tasks.title") }}</h1>
-  <div class="flex mt-5" style="z-index: 1">
-    <ul class="flex-grow">
+  <div class="flex-grow flex mt-5" :class="allDone ? 'justify-center items-center' : ''" style="z-index: 1">
+    <div v-if="allDone" class="flex-grow h-full flex justify-center items-center flex-col">
+      <i class="fas fa-glass-cheers text-9xl"></i>
+      <span class="mt-5">{{ $t("tasks.allDone") }}</span>
+    </div>
+    <ul v-else class="flex-grow">
       <task-element v-for="task of sortedFiltered(showTicked ? 0 : 1)" :key="task.id" :task="task" @click="selectTask(task, $event)"></task-element>
     </ul>
     <task-details v-if="selectedTask" :task="selectedTask" @close-window="selectedTask = null"></task-details>
@@ -32,7 +36,7 @@ export default {
     }
   },
   mounted() {
-    //console.log(this.tasks)
+    console.log(this.tasks)
   },
   methods: {
     selectTask(task, event) {
@@ -52,8 +56,19 @@ export default {
         tasks = tasks.filter(item => !item.ticked)
       if (filterTicked === 2)
         tasks = tasks.filter(item => item.ticked)
+      console.log(tasks)
       return tasks;
     }
+  },
+  computed: {
+      allDone() {
+        try {
+          this.sortedFiltered();
+          return this.sortedFiltered(this.showTicked ? 0 : 1).length === 0 && !this.showTicked;
+        } catch (exception) {
+          return false;
+        }
+      }
   },
   components: {
     "taskElement": TaskElement,

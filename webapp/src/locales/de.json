@@ -27,7 +27,8 @@
     "date": "Datum",
     "desc": "Beschreibung",
     "showTicked": "Abgehäkelte Aufgaben zeigen",
-    "hideTicked": "Abgehäkelte Aufgaben verstecken"
+    "hideTicked": "Abgehäkelte Aufgaben verstecken",
+    "allDone": "Super! Alles ist erledigt! Zeit Videospiele zu zocken!"
   },
   "classes": {
     "title": "Klassen"

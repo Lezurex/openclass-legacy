@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 02.04.21, 00:52
+  - Last modified: 4/13/21, 11:22 AM
   -->
 
 <template>
@@ -11,7 +11,7 @@
   </ul>
   <div class="flex">
     <navbar v-if="loggedIn"></navbar>
-    <router-view class="flex-grow p-4" :class="loggedIn ? 'nav-inset' : null" v-if="loaded"/>
+    <router-view class="flex-grow p-4 min-h-full" :class="loggedIn ? 'nav-inset' : null" v-if="loaded"/>
   </div>
 </template>
 

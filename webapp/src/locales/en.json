@@ -23,7 +23,8 @@
     "date": "Date",
     "desc": "Description",
     "showTicked": "Show ticked tasks",
-    "hideTicked": "Hide ticked tasks"
+    "hideTicked": "Hide ticked tasks",
+    "allDone": "Yay! Everything is done. Now go play some videogames!"
   },
   "classes": {
     "title": "Classes"
