@@ -2,11 +2,13 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 01.04.21, 17:51
+ * Last modified: 4/13/21, 8:21 AM
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
 import {ref} from 'vue';
+import store from '@/store';
+import {User} from "@/entities/User";
 
 export default class Auth extends RequestExecutor {
 
@@ -47,6 +49,11 @@ export default class Auth extends RequestExecutor {
             xhr.addEventListener("load", ev => {
                 let resp = JSON.parse(xhr.responseText);
                 this.loggedIn.value = resp.loggedIn;
+                if (resp.loggedIn) {
+                    store.dispatch("setActiveUser", [User.fromJSON(resp.user)])
+                } else {
+                    store.dispatch("setActiveUser", [null])
+                }
                 resolve(this.loggedIn.value);
             });
             xhr.send();

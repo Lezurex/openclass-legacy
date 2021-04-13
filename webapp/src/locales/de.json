@@ -23,6 +23,7 @@
   "tasks": {
     "title": "Aufgaben & Prüfungen",
     "subject": "Fach",
+    "class": "Klasse",
     "date": "Datum",
     "desc": "Beschreibung",
     "showTicked": "Abgehäkelte Aufgaben zeigen",

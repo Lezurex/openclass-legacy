@@ -2,11 +2,11 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 12.04.21, 21:22
+  - Last modified: 4/13/21, 10:51 AM
   -->
 
 <template>
-  <li class="card task-element">
+  <li class="card task-element cursor-pointer" style="z-index: 1">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
         <input type="checkbox" class="checkbox mr-5" :checked="task.ticked" @change="setTick($event)" @click.stop>

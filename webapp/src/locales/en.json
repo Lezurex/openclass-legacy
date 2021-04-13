@@ -19,6 +19,7 @@
   "tasks": {
     "title": "Tasks & Exams",
     "subject": "Subject",
+    "class": "Class",
     "date": "Date",
     "desc": "Description",
     "showTicked": "Show ticked tasks",

@@ -2,13 +2,13 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 12.04.21, 21:53
+  - Last modified: 4/13/21, 8:51 AM
   -->
 
 <template>
 <main>
   <h1 class="heading">{{ $t("tasks.title") }}</h1>
-  <div class="flex mt-5">
+  <div class="flex mt-5" style="z-index: 1">
     <ul class="flex-grow">
       <task-element v-for="task of sortedFiltered(showTicked ? 0 : 1)" :key="task.id" :task="task" @click="selectTask(task, $event)"></task-element>
     </ul>
