@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/13/21, 9:52 AM
+ * Last modified: 4/13/21, 3:41 PM
  */
 
 :root {
@@ -52,7 +52,11 @@ body {
 }
 
 .checkbox {
-    @apply rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50;
+    @apply rounded border-gray-300 text-indigo-600 shadow-sm dark:bg-gray-700 dark:border-gray-500 focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50 transition;
+}
+
+.checkbox-big {
+    @apply w-8 h-8 rounded-lg;
 }
 
 .spinner {

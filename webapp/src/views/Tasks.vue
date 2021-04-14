@@ -2,16 +2,16 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/13/21, 11:33 AM
+  - Last modified: 4/13/21, 12:54 PM
   -->
 
 <template>
-<main class="min-h-screen flex flex-col">
+<main class="sm:min-h-screen flex flex-col">
   <h1 class="heading">{{ $t("tasks.title") }}</h1>
-  <div class="flex-grow flex mt-5" :class="allDone ? 'justify-center items-center' : ''" style="z-index: 1">
+  <div class="flex-grow flex mt-5" :class="allDone ? 'justify-center items-center' : ''">
     <div v-if="allDone" class="flex-grow h-full flex justify-center items-center flex-col">
-      <i class="fas fa-glass-cheers text-9xl"></i>
-      <span class="mt-5">{{ $t("tasks.allDone") }}</span>
+      <i class="text-9xl" :class="randomAllDoneIcon()"></i>
+      <span class="mt-5 text-xl text-center">{{ $t("tasks.allDone") }}</span>
     </div>
     <ul v-else class="flex-grow">
       <task-element v-for="task of sortedFiltered(showTicked ? 0 : 1)" :key="task.id" :task="task" @click="selectTask(task, $event)"></task-element>
@@ -36,7 +36,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.tasks)
   },
   methods: {
     selectTask(task, event) {
@@ -56,8 +55,15 @@ export default {
         tasks = tasks.filter(item => !item.ticked)
       if (filterTicked === 2)
         tasks = tasks.filter(item => item.ticked)
-      console.log(tasks)
       return tasks;
+    },
+    randomAllDoneIcon() {
+      let icons = [
+          "fas fa-glass-cheers",
+          "fas fa-cocktail",
+          "fas fa-mug-hot"
+      ];
+      return icons[Math.floor(Math.random() * icons.length)];
     }
   },
   computed: {
@@ -79,5 +85,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

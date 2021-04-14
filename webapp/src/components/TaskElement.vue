@@ -2,14 +2,14 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/13/21, 10:51 AM
+  - Last modified: 4/13/21, 3:39 PM
   -->
 
 <template>
-  <li class="card task-element cursor-pointer" style="z-index: 1">
+  <li class="card task-element cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <input type="checkbox" class="checkbox mr-5" :checked="task.ticked" @change="setTick($event)" @click.stop>
+        <input type="checkbox" class="checkbox checkbox-big mr-5" :checked="task.ticked" @change="setTick($event)" @click.stop>
         <div class="flex flex-col">
           <div>
             <b>{{task.subject.name}}</b>:
