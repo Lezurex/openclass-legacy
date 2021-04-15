@@ -28,7 +28,11 @@
     "desc": "Beschreibung",
     "showTicked": "Abgehäkelte Aufgaben zeigen",
     "hideTicked": "Abgehäkelte Aufgaben verstecken",
-    "allDone": "Super! Alles ist erledigt! Zeit Videospiele zu zocken!"
+    "allDone": "Super! Alles ist erledigt! Zeit Videospiele zu zocken!",
+    "errors": {
+      "tickingFailed-title": "Changing tick status failed",
+      "tickingFailed-desc": "An error occurred while changing the tick status of the task."
+    }
   },
   "classes": {
     "title": "Klassen"

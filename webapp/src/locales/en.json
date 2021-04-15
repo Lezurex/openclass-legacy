@@ -24,7 +24,11 @@
     "desc": "Description",
     "showTicked": "Show ticked tasks",
     "hideTicked": "Hide ticked tasks",
-    "allDone": "Yay! Everything is done. Now go play some videogames!"
+    "allDone": "Yay! Everything is done. Now go play some videogames!",
+    "errors": {
+      "tickingFailed-title": "Changing tick status failed",
+      "tickingFailed-desc": "An error occurred while changing the tick status of the task."
+    }
   },
   "classes": {
     "title": "Classes"

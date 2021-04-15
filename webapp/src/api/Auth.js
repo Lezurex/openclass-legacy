@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/13/21, 8:21 AM
+ * Last modified: 4/15/21, 5:10 PM
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
@@ -32,6 +32,10 @@ export default class Auth extends RequestExecutor {
                 if (this.isSuccessful(xhr.status)) {
                     resolve(resp);
                 } else {
+                    if (!resp || !resp.code) {
+                        reject();
+                        return;
+                    }
                     if (resp.code === 1011) {
                         resolve(resp);
                     } else {
@@ -47,14 +51,16 @@ export default class Auth extends RequestExecutor {
         return new Promise(resolve => {
             let xhr = this.buildXHR("auth", "GET");
             xhr.addEventListener("load", ev => {
-                let resp = JSON.parse(xhr.responseText);
-                this.loggedIn.value = resp.loggedIn;
-                if (resp.loggedIn) {
-                    store.dispatch("setActiveUser", [User.fromJSON(resp.user)])
-                } else {
-                    store.dispatch("setActiveUser", [null])
+                if (xhr.responseText.startsWith("{")) {
+                    let resp = JSON.parse(xhr.responseText);
+                    this.loggedIn.value = resp.loggedIn;
+                    if (resp.loggedIn) {
+                        store.dispatch("setActiveUser", [User.fromJSON(resp.user)])
+                    } else {
+                        store.dispatch("setActiveUser", [null])
+                    }
+                    resolve(this.loggedIn.value);
                 }
-                resolve(this.loggedIn.value);
             });
             xhr.send();
         })

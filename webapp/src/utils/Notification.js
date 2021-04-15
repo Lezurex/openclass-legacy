@@ -2,12 +2,12 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 02.04.21, 00:56
+ * Last modified: 4/15/21, 12:30 PM
  */
 
 import {ref} from "vue";
 
-export default class Notification {
+export class Notification {
 
     static TYPE = {
         error: 1,

@@ -2,10 +2,11 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 12.04.21, 18:52
+ * Last modified: 4/15/21, 4:19 PM
  */
 
 import {Class} from "@/entities/Class";
+import {Notification} from '@/utils/Notification';
 
 const state = () => ({
     all: {}
@@ -51,7 +52,7 @@ const actions = {
                     context.commit("setTaskTick", [task, value]);
                     resolve();
                 } else {
-                    context.commit("setTaskTick", [task, !value]);
+                    new Notification(global.i18n.global.t("tasks.errors.tickingFailed-title"), global.i18n.global.t("tasks.errors.tickingFailed-title"), Notification.TYPE.error);
                     reject();
                 }
             });
