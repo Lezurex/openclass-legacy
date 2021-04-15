@@ -1,4 +1,6 @@
 # 📖Openclass
+[![HitCount](http://hits.dwyl.com/lezurex/openclass.svg)](http://hits.dwyl.com/lezurex/openclass)
+
 Webapp for writing down assignments for the whole class.
 
 This is the future successor of the [Klassenspiegel](https://github.com/Lezurex/Klassenspiegel).
