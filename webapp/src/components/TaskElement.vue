@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/13/21, 3:39 PM
+  - Last modified: 15.04.21, 19:33
   -->
 
 <template>
@@ -34,12 +34,15 @@ export default {
   },
   data() {
     return {
-
     }
   },
   methods: {
     async setTick(event) {
-      await this.$store.dispatch("classes/setTaskTick", [this.task, event.target.checked]);
+      try {
+        await this.$store.dispatch("classes/setTaskTick", [this.task, event.target.checked]);
+      } catch (exception) {
+        console.error("Ticking failed!")
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 4/15/21, 12:24 PM
+  - Last modified: 15.04.21, 19:51
   -->
 
 <template>
@@ -33,7 +33,6 @@ export default {
       this.loaded = true;
     } else {
       this.$store.dispatch("classes/loadClasses").then(() => {
-        console.log("Classes loaded")
         this.loaded = true;
         this.$router.push('/tasks');
       });

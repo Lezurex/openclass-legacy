@@ -18,7 +18,9 @@
   },
   "errors": {
     "429-title": "Zu viele Anfragen",
-    "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!"
+    "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!",
+    "500-title": "Verbindung fehlgeschlagen",
+    "500-desc": "Es konnte keine Verbindung zum Server hergestellt werden. Prüfe deine Netzwerkverbindung und versuche es später erneut."
   },
   "tasks": {
     "title": "Aufgaben & Prüfungen",

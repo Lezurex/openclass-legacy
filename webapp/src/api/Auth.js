@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/15/21, 5:10 PM
+ * Last modified: 15.04.21, 19:43
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
@@ -48,7 +48,7 @@ export default class Auth extends RequestExecutor {
     }
 
     async getStatus() {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             let xhr = this.buildXHR("auth", "GET");
             xhr.addEventListener("load", ev => {
                 if (xhr.responseText.startsWith("{")) {
@@ -60,7 +60,8 @@ export default class Auth extends RequestExecutor {
                         store.dispatch("setActiveUser", [null])
                     }
                     resolve(this.loggedIn.value);
-                }
+                } else
+                    reject();
             });
             xhr.send();
         })

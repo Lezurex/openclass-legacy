@@ -2,11 +2,12 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/15/21, 4:19 PM
+ * Last modified: 15.04.21, 20:15
  */
 
 import {Class} from "@/entities/Class";
 import {Notification} from '@/utils/Notification';
+import RequestExecutor from "@/api/RequestExecutor";
 
 const state = () => ({
     all: {}
@@ -23,8 +24,7 @@ const getters = {
 const actions = {
     async loadClasses(context) {
         return new Promise((resolve, reject) => {
-            let req = new XMLHttpRequest();
-            req.open("GET", window.location.origin + "/api/class?deep=1")
+            let req = new RequestExecutor().buildXHR("class?deep=1", "GET")
             req.addEventListener("load", () => {
                 if (req.status === 200) {
                     let data = JSON.parse(req.responseText);
@@ -45,14 +45,14 @@ const actions = {
         let task = payload[0];
         let value = payload[1];
         return new Promise((resolve, reject) => {
-            let req = new XMLHttpRequest();
-            req.open(value ? 'POST' : 'DELETE', window.location.origin + "/api/class/" + task.classObj.id + "/tasks/" + task.id + "/tick")
+            let req = new RequestExecutor().buildXHR("class/" + task.classObj.id + "/tasks/" + task.id + "/tick", value ? 'POST' : 'DELETE');
             req.addEventListener("load", () => {
                 if (req.status === 204) {
                     context.commit("setTaskTick", [task, value]);
                     resolve();
                 } else {
                     new Notification(global.i18n.global.t("tasks.errors.tickingFailed-title"), global.i18n.global.t("tasks.errors.tickingFailed-title"), Notification.TYPE.error);
+                    context.commit("setTaskTick", [task, !value])
                     reject();
                 }
             });

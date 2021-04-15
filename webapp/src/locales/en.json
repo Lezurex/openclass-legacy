@@ -14,7 +14,9 @@
   },
   "errors": {
     "429-title": "Too Many Requests",
-    "429-desc": "You performed too many actions! Please slow down and try again later!"
+    "429-desc": "You performed too many actions! Please slow down and try again later!",
+    "500-title": "Connection to server failed",
+    "500-desc": "Client could not connect to the server. Check your connection and try again later."
   },
   "tasks": {
     "title": "Tasks & Exams",
