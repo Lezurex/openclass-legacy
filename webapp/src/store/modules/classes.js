@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 15.04.21, 20:15
+ * Last modified: 4/16/21, 8:34 AM
  */
 
 import {Class} from "@/entities/Class";
@@ -46,13 +46,14 @@ const actions = {
         let value = payload[1];
         return new Promise((resolve, reject) => {
             let req = new RequestExecutor().buildXHR("class/" + task.classObj.id + "/tasks/" + task.id + "/tick", value ? 'POST' : 'DELETE');
-            req.addEventListener("load", () => {
+            req.addEventListener("load", async () => {
                 if (req.status === 204) {
                     context.commit("setTaskTick", [task, value]);
                     resolve();
                 } else {
-                    new Notification(global.i18n.global.t("tasks.errors.tickingFailed-title"), global.i18n.global.t("tasks.errors.tickingFailed-title"), Notification.TYPE.error);
-                    context.commit("setTaskTick", [task, !value])
+                    new Notification(global.i18n.global.t("tasks.errors.tickingFailed-title"), global.i18n.global.t("tasks.errors.tickingFailed-desc"), Notification.TYPE.error);
+                    await context.commit("setTaskTick", [task, !context.state.all[task.classObj.id].tasks[task.id].ticked]);
+                    await context.commit("setTaskTick", [task, !context.state.all[task.classObj.id].tasks[task.id].ticked]);
                     reject();
                 }
             });
