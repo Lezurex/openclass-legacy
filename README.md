@@ -18,3 +18,4 @@ For furhter information about the API and how to use it [check out the API docs]
 The frontend is fully translatable. Currently available languages are:
 - 🇬🇧 English
 - 🇩🇪 German
+- 💻 Tec-Englesch
