@@ -13,6 +13,8 @@
     }
   },
   "errors": {
+    "401-title": "Session expired",
+    "401-desc": "Your session has expired. Please log in again!",
     "429-title": "Too Many Requests",
     "429-desc": "You performed too many actions! Please slow down and try again later!",
     "500-title": "Connection to server failed",

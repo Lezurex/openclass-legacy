@@ -1,9 +1,11 @@
 # 📖Openclass
+[![HitCount](http://hits.dwyl.com/lezurex/openclass.svg)](http://hits.dwyl.com/lezurex/openclass)
+
 Webapp for writing down assignments for the whole class.
 
 This is the future successor of the [Klassenspiegel](https://github.com/Lezurex/Klassenspiegel).
 
-This Node.js webapp provides an easy and simple way to write down assignments and tasks for the whole class, so anybody has to ask for the homework in a WhatsApp group chat ever again!
+This Node.js webapp provides an easy and simple way to write down assignments and tasks for the whole class, so nobody has to ask for the homework in a WhatsApp group chat ever again!
 
 **This project is currently still under development!**
 

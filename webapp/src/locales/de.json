@@ -17,6 +17,8 @@
     "classes": "Klassen"
   },
   "errors": {
+    "401-title": "Sitzung abgelaufen",
+    "401-desc": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
     "429-title": "Zu viele Anfragen",
     "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!",
     "500-title": "Verbindung fehlgeschlagen",
