@@ -1,4 +1,5 @@
 # 📖Openclass
+[![webapp](https://github.com/Lezurex/openclass/actions/workflows/webapp-builder.yml/badge.svg)](https://github.com/Lezurex/openclass/actions/workflows/webapp-builder.yml)
 [![HitCount](http://hits.dwyl.com/lezurex/openclass.svg)](http://hits.dwyl.com/lezurex/openclass)
 
 Webapp for writing down assignments for the whole class.
