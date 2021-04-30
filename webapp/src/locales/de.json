@@ -17,6 +17,8 @@
     "classes": "Klassen"
   },
   "errors": {
+    "401-title": "Sitzung abgelaufen",
+    "401-desc": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
     "429-title": "Zu viele Anfragen",
     "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!",
     "500-title": "Verbindung fehlgeschlagen",
@@ -32,8 +34,8 @@
     "hideTicked": "Abgehäkelte Aufgaben verstecken",
     "allDone": "Super! Alles ist erledigt! Zeit Videospiele zu zocken!",
     "errors": {
-      "tickingFailed-title": "Changing tick status failed",
-      "tickingFailed-desc": "An error occurred while changing the tick status of the task."
+      "tickingFailed-title": "Ändern des Häkchens fehlgeschlagen",
+      "tickingFailed-desc": "Während dem Ändern des Häkchens ist ein Fehler aufgetreten."
     }
   },
   "classes": {
