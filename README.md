@@ -1,4 +1,5 @@
 # 📖Openclass
+[![webapp](https://github.com/Lezurex/openclass/actions/workflows/webapp-builder.yml/badge.svg)](https://github.com/Lezurex/openclass/actions/workflows/webapp-builder.yml)
 [![HitCount](http://hits.dwyl.com/lezurex/openclass.svg)](http://hits.dwyl.com/lezurex/openclass)
 
 Webapp for writing down assignments for the whole class.
@@ -18,3 +19,4 @@ For furhter information about the API and how to use it [check out the API docs]
 The frontend is fully translatable. Currently available languages are:
 - 🇬🇧 English
 - 🇩🇪 German
+- 💻 Tec-Englesch
