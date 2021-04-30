@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 12.04.21, 08:29
+ * Last modified: 30.04.21, 21:28
  */
 
 import {Subject} from "@/entities/Subject";
@@ -33,22 +33,22 @@ export class Class {
     }
 
     static fromJSONDeep(obj) {
-        let instance = new Class(obj.id, obj.name);
-        let subjects = {};
+        const instance = new Class(obj.id, obj.name);
+        const subjects = {};
         Object.values(obj.subjects).forEach(sObj => {
-            let subject = new Subject(sObj.id, sObj.name, sObj.teacher, instance);
+            const subject = new Subject(sObj.id, sObj.name, sObj.teacher, instance);
             subjects[subject.id] = subject;
         });
         instance.subjects = subjects;
-        let roles = {};
+        const roles = {};
         Object.values(obj.roles).forEach(rObj => {
-            let role = new Role(rObj.id, rObj.name, instance, rObj.permissions);
+            const role = new Role(rObj.id, rObj.name, instance, rObj.permissions);
             roles[role.id] = role;
         });
         instance.roles = roles;
-        let tasks = {};
+        const tasks = {};
         Object.values(obj.tasks).forEach(tObj => {
-            let task = new Task(tObj.id, tObj.title, tObj.body, new Date(tObj.dueDate), subjects[tObj.subject], instance, tObj.ticked);
+            const task = new Task(tObj.id, tObj.title, tObj.body, new Date(tObj.dueDate), subjects[tObj.subject], instance, tObj.ticked);
             tasks[task.id] = task;
         });
         instance.tasks = tasks;

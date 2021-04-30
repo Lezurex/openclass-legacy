@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 15.04.21, 19:51
+ * Last modified: 30.04.21, 21:28
  */
 
 import App from './App.vue';
@@ -34,8 +34,8 @@ global.i18n = i18n;
 defineLanguage();
 
 async function defineLanguage() {
-    for (let lang of navigator.languages) {
-        let loaded = await loadLocaleMessages(i18n, lang);
+    for (const lang of navigator.languages) {
+        const loaded = await loadLocaleMessages(i18n, lang);
         if (loaded) {
             setI18nLanguage(i18n, lang);
             break;

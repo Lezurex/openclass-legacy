@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/16/21, 8:50 AM
+ * Last modified: 30.04.21, 21:28
  */
 import {Notification} from "@/utils/Notification";
 import Router from '@/router';
@@ -15,7 +15,7 @@ export default class RequestExecutor {
      * @returns {XMLHttpRequest}
      */
     buildXHR(path, method) {
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open(method, window.location.origin + "/api/" + path);
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.addEventListener("load", async ev => {

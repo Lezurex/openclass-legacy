@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 4/16/21, 8:34 AM
+ * Last modified: 30.04.21, 21:28
  */
 
 import {Class} from "@/entities/Class";
@@ -15,7 +15,7 @@ const state = () => ({
 
 const getters = {
     getAllTasks(state) {
-        let tasks = [];
+        const tasks = [];
         Object.values(state.all).forEach(cObj => Object.values(cObj.tasks).forEach(task => tasks.push(task)))
         return tasks;
     }
@@ -24,13 +24,13 @@ const getters = {
 const actions = {
     async loadClasses(context) {
         return new Promise((resolve, reject) => {
-            let req = new RequestExecutor().buildXHR("class?deep=1", "GET")
+            const req = new RequestExecutor().buildXHR("class?deep=1", "GET")
             req.addEventListener("load", () => {
                 if (req.status === 200) {
-                    let data = JSON.parse(req.responseText);
-                    let classes = {};
+                    const data = JSON.parse(req.responseText);
+                    const classes = {};
                     Object.values(data).forEach(obj => {
-                        let classObj = Class.fromJSONDeep(obj);
+                        const classObj = Class.fromJSONDeep(obj);
                         classes[classObj.id] = classObj;
                     })
                     context.commit("setClasses", classes)
@@ -42,10 +42,10 @@ const actions = {
         })
     },
     async setTaskTick(context, payload) {
-        let task = payload[0];
-        let value = payload[1];
+        const task = payload[0];
+        const value = payload[1];
         return new Promise((resolve, reject) => {
-            let req = new RequestExecutor().buildXHR("class/" + task.classObj.id + "/tasks/" + task.id + "/tick", value ? 'POST' : 'DELETE');
+            const req = new RequestExecutor().buildXHR("class/" + task.classObj.id + "/tasks/" + task.id + "/tick", value ? 'POST' : 'DELETE');
             req.addEventListener("load", async () => {
                 if (req.status === 204) {
                     context.commit("setTaskTick", [task, value]);

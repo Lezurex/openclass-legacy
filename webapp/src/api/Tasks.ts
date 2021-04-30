@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 12.04.21, 18:26
+ * Last modified: 30.04.21, 21:28
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
@@ -15,10 +15,10 @@ export default class Tasks extends RequestExecutor {
 
     async getAllTasks() {
         return new Promise(resolve => {
-            let xhr = this.buildXHR("tasks", "GET");
+            const xhr = this.buildXHR("tasks", "GET");
             xhr.addEventListener("load", ev => {
                 if (xhr.status === 200) {
-                    let data = JSON.parse(xhr.responseText);
+                    const data = JSON.parse(xhr.responseText);
                     Object.values(data).forEach(taskObj => {
                        Task.fromJSON(taskObj);
                     });
