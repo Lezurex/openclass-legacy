@@ -2,16 +2,16 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 30.04.21, 21:28
+ * Last modified: 30.04.21, 22:02
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
 import {Task} from "@/entities/Task";
-import {ref} from "vue";
+import {ref, Ref} from "vue";
 
 export default class Tasks extends RequestExecutor {
 
-    tasks = ref({});
+    tasks : Ref<any> = ref({});
 
     async getAllTasks() {
         return new Promise(resolve => {

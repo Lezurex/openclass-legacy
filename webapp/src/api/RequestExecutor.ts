@@ -2,10 +2,11 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 30.04.21, 21:28
+ * Last modified: 30.04.21, 22:24
  */
 import {Notification} from "@/utils/Notification";
 import Router from '@/router';
+import {NotificationType} from "@/utils/NotificationType";
 
 export default class RequestExecutor {
     /**
@@ -14,32 +15,32 @@ export default class RequestExecutor {
      * @param method {String} HTTP request method to use (GET, POST, PATCH, DELETE, etc)
      * @returns {XMLHttpRequest}
      */
-    buildXHR(path, method) {
+    buildXHR(path : string, method : string) {
         const xhr = new XMLHttpRequest();
         xhr.open(method, window.location.origin + "/api/" + path);
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.addEventListener("load", async ev => {
             switch (xhr.status) {
                 case 429:
-                    new Notification(global.i18n.global.t("errors.429-title"), global.i18n.global.t("errors.429-desc"), Notification.TYPE.error);
+                    new Notification(window.i18n.global.t("errors.429-title"), window.i18n.global.t("errors.429-desc"), NotificationType.ERROR);
                     break;
                 case 500:
-                    new Notification(global.i18n.global.t("errors.500-title"), global.i18n.global.t("errors.500-desc"), Notification.TYPE.error);
+                    new Notification(window.i18n.global.t("errors.500-title"), window.i18n.global.t("errors.500-desc"), NotificationType.ERROR);
                     break;
                 case 401:
-                    new Notification(global.i18n.global.t("errors.401-title"), global.i18n.global.t("errors.401-desc"), Notification.TYPE.error);
-                    global.API.auth.loggedIn.value = false;
+                    new Notification(window.i18n.global.t("errors.401-title"), window.i18n.global.t("errors.401-desc"), NotificationType.ERROR);
+                    window.API.auth.loggedIn.value = false;
                     await Router.push("/login");
                     break;
             }
         });
         xhr.addEventListener("error", ev => {
-            new Notification(global.i18n.global.t("errors.no-connection-title"), global.i18n.global.t("errors.no-connection-desc"), Notification.TYPE.error);
+            new Notification(window.i18n.global.t("errors.no-connection-title"), window.i18n.global.t("errors.no-connection-desc"), NotificationType.ERROR);
         })
         return xhr;
     }
 
-    isSuccessful(statusCode) {
+    isSuccessful(statusCode : number) {
         return statusCode >= 200 && statusCode < 300;
     }
 }

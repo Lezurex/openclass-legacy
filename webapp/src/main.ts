@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 30.04.21, 21:28
+ * Last modified: 30.04.21, 21:50
  */
 
 import App from './App.vue';
@@ -16,6 +16,7 @@ import APIManager from "@/api/APIManager";
 import router from './router'
 import NotificationManager from "@/utils/NotificationManager";
 import store from './store';
+import {I18n} from "vue-i18n";
 
 const i18n = setupI18n({
     globalInjection: true,
@@ -27,9 +28,17 @@ const i18n = setupI18n({
     silentFallbackWarn: true
 });
 
-global.API = new APIManager();
-global.notificationManager = new NotificationManager();
-global.i18n = i18n;
+declare global {
+    interface Window {
+        API : APIManager,
+        notificationManager : NotificationManager,
+        i18n : I18n<unknown, unknown, unknown>
+    }
+}
+
+window.API = new APIManager();
+window.notificationManager = new NotificationManager();
+window.i18n = i18n;
 
 defineLanguage();
 
@@ -42,7 +51,7 @@ async function defineLanguage() {
         }
     }
     try {
-        await global.API.auth.getStatus();
+        await window.API.auth.getStatus();
     } catch (e) {
         console.error("Failed to get status.")
     }
