@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 30.04.21, 21:28
+ * Last modified: 30.04.21, 21:50
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
@@ -14,7 +14,7 @@ export default class Auth extends RequestExecutor {
 
     loggedIn = ref(false);
 
-    async login(email, password) {
+    async login(email : string, password : string) {
         return new Promise((resolve, reject) => {
             const body = JSON.stringify({
                 email: email,

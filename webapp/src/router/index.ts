@@ -2,15 +2,15 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 30.04.21, 21:27
+ * Last modified: 30.04.21, 22:09
  */
 
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from "@/views/Login";
-import Tasks from "@/views/Tasks";
-import Classes from "@/views/Classes";
+import Login from "@/views/Login.vue";
+import Tasks from "@/views/Tasks.vue";
+import Classes from "@/views/Classes.vue";
 
-const routes = [
+const routes : any[] = [
   {
     path: '/login',
     name: 'Login',
