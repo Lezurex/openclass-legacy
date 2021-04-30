@@ -12,12 +12,49 @@
       "wrong-credentials-desc": "Email and/or password is incorrect! Try again!"
     }
   },
-  "pages": {
-    "tasks": "Tasks",
-    "classes": "Classes"
-  },
   "errors": {
+    "401-title": "Session expired",
+    "401-desc": "Your session has expired. Please log in again!",
     "429-title": "Too Many Requests",
-    "429-desc": "You performed too many actions! Please slow down and try again later!"
+    "429-desc": "You performed too many actions! Please slow down and try again later!",
+    "500-title": "Connection to server failed",
+    "500-desc": "Client could not connect to the server. Check your connection and try again later."
+  },
+  "tasks": {
+    "title": "Tasks & Exams",
+    "subject": "Subject",
+    "class": "Class",
+    "date": "Date",
+    "desc": "Description",
+    "showTicked": "Show ticked tasks",
+    "hideTicked": "Hide ticked tasks",
+    "allDone": "Yay! Everything is done. Now go play some videogames!",
+    "errors": {
+      "tickingFailed-title": "Changing tick status failed",
+      "tickingFailed-desc": "An error occurred while changing the tick status of the task."
+    }
+  },
+  "classes": {
+    "title": "Classes"
+  },
+  "dateFormat": {
+    "middle": {
+      "year": "numeric",
+      "month": "numeric",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": true
+    },
+    "long": {
+      "year": "numeric",
+      "month": "long",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": true
+    }
   }
 }

@@ -2,7 +2,7 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 01.04.21, 21:54
+  - Last modified: 15.04.21, 19:46
   -->
 
 <template>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Notification from "@/utils/Notification";
+import {Notification} from "@/utils/Notification";
 
 export default {
   data() {
@@ -46,16 +46,21 @@ export default {
     async login() {
       if (this.email && this.password) {
         this.loginPending = true;
-        let resp = await global.API.auth.login(this.email, this.password);
-        if (resp === null) {
-          this.$router.push("/tasks");
-          global.API.auth.getStatus();
-          new Notification(this.$t("login.success-title"), this.$t("login.success-desc"), Notification.TYPE.success, 200);
-        } else {
-          switch (resp.code) {
-            case 1012: // Wrong credentials
-              new Notification(this.$t("login.errors.wrong-credentials-title"), this.$t("login.errors.wrong-credentials-desc"), Notification.TYPE.error);
+        try {
+          let resp = await global.API.auth.login(this.email, this.password);
+          if (resp === null) {
+            await this.$store.dispatch("classes/loadClasses");
+            await this.$router.push("/tasks");
+            await global.API.auth.getStatus();
+            new Notification(this.$t("login.success-title"), this.$t("login.success-desc"), Notification.TYPE.success, 200);
+          } else {
+            switch (resp.code) {
+              case 1012: // Wrong credentials
+                new Notification(this.$t("login.errors.wrong-credentials-title"), this.$t("login.errors.wrong-credentials-desc"), Notification.TYPE.error);
+            }
           }
+        } catch (e) {
+          this.loginPending = false;
         }
         this.loginPending = false;
       }

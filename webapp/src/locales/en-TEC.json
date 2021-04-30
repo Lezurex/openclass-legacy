@@ -1,0 +1,54 @@
+{
+  "login": {
+    "email": "Ii-Meil",
+    "email-sample": "max.mustermann{'@'}mail.de",
+    "password": "Paswortd",
+    "forgot-password-question": "Ser, did yiu forgot yor paswortd?",
+    "btn-login": "log in",
+    "success-title": "logtd in",
+    "success-desc": "Yiu hev ben sugsesfulli logtd in!",
+    "errors": {
+      "wrong-credentials-title": "wrong datda",
+      "wrong-credentials-desc": "Ii-Meil end/or paswortd wrong!"
+    }
+  },
+  "pages": {
+    "tasks": "Aseinements ",
+    "classes": "Cklasses"
+  },
+  "errors": {
+    "429-title": "to mani reqwests",
+    "429-desc": "Yiu maked to mani reqwests, calm dawn and try egen laiter!"
+  },
+  "tasks": {
+    "title": "Aseinements & Egsams",
+    "subject": "Sabjekt",
+    "date": "Daite",
+    "desc": "Discribtion",
+    "showTicked": "Shovw tiktd Aseinements ",
+    "hideTicked": "Heide tiktd Aseinements "
+  },
+  "classes": {
+    "title": "Cklasses"
+  },
+  "dateFormat": {
+    "middle": {
+      "year": "numeric",
+      "month": "numeric",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    },
+    "long": {
+      "year": "numeric",
+      "month": "long",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    }
+  }
+}

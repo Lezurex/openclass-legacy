@@ -17,7 +17,48 @@
     "classes": "Klassen"
   },
   "errors": {
+    "401-title": "Sitzung abgelaufen",
+    "401-desc": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
     "429-title": "Zu viele Anfragen",
-    "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!"
+    "429-desc": "Du hast zu viele Aktionen ausgeführt. Komm ein wenig herunter und versuche es in einem Moment nochmals!",
+    "500-title": "Verbindung fehlgeschlagen",
+    "500-desc": "Es konnte keine Verbindung zum Server hergestellt werden. Prüfe deine Netzwerkverbindung und versuche es später erneut."
+  },
+  "tasks": {
+    "title": "Aufgaben & Prüfungen",
+    "subject": "Fach",
+    "class": "Klasse",
+    "date": "Datum",
+    "desc": "Beschreibung",
+    "showTicked": "Abgehäkelte Aufgaben zeigen",
+    "hideTicked": "Abgehäkelte Aufgaben verstecken",
+    "allDone": "Super! Alles ist erledigt! Zeit Videospiele zu zocken!",
+    "errors": {
+      "tickingFailed-title": "Ändern des Häkchens fehlgeschlagen",
+      "tickingFailed-desc": "Während dem Ändern des Häkchens ist ein Fehler aufgetreten."
+    }
+  },
+  "classes": {
+    "title": "Klassen"
+  },
+  "dateFormat": {
+    "middle": {
+      "year": "numeric",
+      "month": "numeric",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    },
+    "long": {
+      "year": "numeric",
+      "month": "long",
+      "day": "numeric",
+      "weekday": "long",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    }
   }
 }

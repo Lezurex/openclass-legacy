@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 28.03.21, 14:45
+ * Last modified: 4/13/21, 11:47 AM
  */
 
 /**
@@ -24,7 +24,7 @@ function hasPermission(user, classObj, permissionName) {
  * @returns {boolean} Whether or not the user is in the class.
  */
 function isInClass(user, classObj) {
-    let relation = Object.values(user.classRelations).find(relation => relation.class.id === classObj.id);
+    let relation = Object.values(user.classRelations).find(relation => relation.class === classObj.id);
     return !!relation;
 }
 

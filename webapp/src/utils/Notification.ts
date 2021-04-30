@@ -2,12 +2,12 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 01.04.21, 21:03
+ * Last modified: 30.04.21, 21:27
  */
 
 import {ref} from "vue";
 
-export default class Notification {
+export class Notification {
 
     static TYPE = {
         error: 1,
@@ -27,7 +27,7 @@ export default class Notification {
      * Creates a new {@link Notification} and appends it to the notification stack.
      * @param title {String}
      * @param description {String}
-     * @param type {Error.ERROR_TYPE}
+     * @param type {Notification.TYPE}
      * @param duration {Number}
      */
     constructor(title, description, type, duration = 500) {

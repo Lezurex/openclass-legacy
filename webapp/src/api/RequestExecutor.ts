@@ -2,9 +2,10 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 01.04.21, 21:46
+ * Last modified: 30.04.21, 21:28
  */
-import Notification from "@/utils/Notification";
+import {Notification} from "@/utils/Notification";
+import Router from '@/router';
 
 export default class RequestExecutor {
     /**
@@ -14,14 +15,26 @@ export default class RequestExecutor {
      * @returns {XMLHttpRequest}
      */
     buildXHR(path, method) {
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open(method, window.location.origin + "/api/" + path);
         xhr.setRequestHeader("Content-type", "application/json");
-        xhr.addEventListener("load", ev => {
+        xhr.addEventListener("load", async ev => {
             switch (xhr.status) {
                 case 429:
                     new Notification(global.i18n.global.t("errors.429-title"), global.i18n.global.t("errors.429-desc"), Notification.TYPE.error);
+                    break;
+                case 500:
+                    new Notification(global.i18n.global.t("errors.500-title"), global.i18n.global.t("errors.500-desc"), Notification.TYPE.error);
+                    break;
+                case 401:
+                    new Notification(global.i18n.global.t("errors.401-title"), global.i18n.global.t("errors.401-desc"), Notification.TYPE.error);
+                    global.API.auth.loggedIn.value = false;
+                    await Router.push("/login");
+                    break;
             }
+        });
+        xhr.addEventListener("error", ev => {
+            new Notification(global.i18n.global.t("errors.no-connection-title"), global.i18n.global.t("errors.no-connection-desc"), Notification.TYPE.error);
         })
         return xhr;
     }

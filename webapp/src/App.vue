@@ -2,36 +2,40 @@
   - Copyright (c) 2021 Lenny Angst. All rights reserved.
   - For more information about the license read the LICENSE file at the root of this repo.
   - Written for Project: openclass
-  - Last modified: 01.04.21, 21:49
+  - Last modified: 4/16/21, 3:18 PM
   -->
 
 <template>
-  <ul class="fixed bottom-5 right-5 z-10 overflow-y-scroll max-h-full notification-list max-w-sm">
+  <ul class="fixed bottom-5 right-5 z-30 overflow-y-scroll max-h-full notification-list max-w-sm">
     <notification v-for="notification of notifications" :key="notification.id" :notification="notification"></notification>
   </ul>
   <div class="flex">
-    <navbar v-if="loggedIn"></navbar>
-    <router-view class="flex-grow p-4" :class="loggedIn ? 'nav-inset' : null"/>
+    <navbar id="navbar" v-if="loggedIn"></navbar>
+    <router-view class="flex-grow p-4 min-h-full" :class="loggedIn ? 'nav-inset' : null" v-if="loaded"/>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar";
 import Notification from "@/components/Notification";
-import NotificationObj from '@/utils/Notification';
 
 export default {
   data() {
     return {
       loggedIn: global.API.auth.loggedIn,
       notifications: global.notificationManager.notifications,
+      loaded: false
     }
   },
   mounted() {
     if (!global.API.auth.isLoggedIn()) {
       this.$router.push("/login");
+      this.loaded = true;
     } else {
-      this.$router.push('/tasks');
+      this.$store.dispatch("classes/loadClasses").then(() => {
+        this.loaded = true;
+        this.$router.push('/tasks');
+      });
     }
   },
   components: {
@@ -45,14 +49,24 @@ export default {
 
 @media only screen and (min-width: 640px) {
   .nav-inset {
-    margin-left: 5rem;
+    @apply ml-20;
+    transition: 150ms ease;
   }
+  #navbar:hover ~ .nav-inset {
+    @apply ml-64;
+    transition: 150ms ease;
+  }
+
 }
 
 @media only screen and (max-width: 640px) {
   .nav-inset {
     margin-bottom: 5rem;
   }
+}
+
+.notification-list {
+  scrollbar-width: none;
 }
 
 .notification-list::-webkit-scrollbar {

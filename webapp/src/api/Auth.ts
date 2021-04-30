@@ -2,11 +2,13 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 01.04.21, 17:51
+ * Last modified: 30.04.21, 21:28
  */
 
 import RequestExecutor from "@/api/RequestExecutor";
 import {ref} from 'vue';
+import store from '@/store';
+import {User} from "@/entities/User";
 
 export default class Auth extends RequestExecutor {
 
@@ -14,11 +16,11 @@ export default class Auth extends RequestExecutor {
 
     async login(email, password) {
         return new Promise((resolve, reject) => {
-            let body = JSON.stringify({
+            const body = JSON.stringify({
                 email: email,
                 password: password
             });
-            let xhr = this.buildXHR("auth/login", "POST");
+            const xhr = this.buildXHR("auth/login", "POST");
             xhr.addEventListener("load", ev => {
                 let resp;
                 try {
@@ -30,6 +32,10 @@ export default class Auth extends RequestExecutor {
                 if (this.isSuccessful(xhr.status)) {
                     resolve(resp);
                 } else {
+                    if (!resp || !resp.code) {
+                        reject();
+                        return;
+                    }
                     if (resp.code === 1011) {
                         resolve(resp);
                     } else {
@@ -42,12 +48,20 @@ export default class Auth extends RequestExecutor {
     }
 
     async getStatus() {
-        return new Promise(resolve => {
-            let xhr = this.buildXHR("auth", "GET");
+        return new Promise((resolve, reject) => {
+            const xhr = this.buildXHR("auth", "GET");
             xhr.addEventListener("load", ev => {
-                let resp = JSON.parse(xhr.responseText);
-                this.loggedIn.value = resp.loggedIn;
-                resolve(this.loggedIn.value);
+                if (xhr.responseText.startsWith("{")) {
+                    const resp = JSON.parse(xhr.responseText);
+                    this.loggedIn.value = resp.loggedIn;
+                    if (resp.loggedIn) {
+                        store.dispatch("setActiveUser", [User.fromJSON(resp.user)])
+                    } else {
+                        store.dispatch("setActiveUser", [null])
+                    }
+                    resolve(this.loggedIn.value);
+                } else
+                    reject();
             });
             xhr.send();
         })
