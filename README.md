@@ -20,3 +20,5 @@ The frontend is fully translatable. Currently available languages are:
 - 🇬🇧 English
 - 🇩🇪 German
 - 💻 Tec-Englesch
+
+More languages following...
