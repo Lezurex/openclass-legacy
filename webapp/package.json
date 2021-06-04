@@ -10,7 +10,7 @@
   "dependencies": {
     "@panter/vue-i18next": "^0.15.2",
     "@popperjs/core": "^2.9.2",
-    "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/forms": "^0.3.3",
     "@vue/runtime-core": "^3.0.11",
     "core-js": "^3.13.1",
     "icon.place": "^1.0.3",
