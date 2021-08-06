@@ -2,7 +2,7 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 28.03.21, 20:52
+ * Last modified: 8/7/21, 12:57 AM
  */
 
 /**

@@ -1,7 +1,14 @@
-const mysql = require("mysql");
-const config = require("../../config/config.json").database;
-const initializer = require("../initializer");
-const fs = require('fs');
+/*
+ * Copyright (c) 2021 Lenny Angst. All rights reserved.
+ * For more information about the license read the LICENSE file at the root of this repo.
+ * Written for Project: openclass
+ * Last modified: 8/7/21, 12:57 AM
+ */
+
+import mysql, {Connection} from "mysql";
+const config = require('../../config/config.json');
+import initializer from "../initializer";
+import fs from "fs";
 
 const dbStructurePath = "../db_structure.sql";
 
@@ -10,7 +17,7 @@ const dbStructurePath = "../db_structure.sql";
  */
 class Database {
 
-    static con;
+    static con : Connection;
 
     /**
      * Connects to the database with the given options. Initializes an event handler when
@@ -22,7 +29,7 @@ class Database {
         /**
          * Register an event handler for errors
          */
-        global.db.on("error", error => {
+        global.db.on("error", (error: { fatal: any; code: string; }) => {
             if (!error.fatal)
                 return;
             // Exclude errors related to connection problems
@@ -35,9 +42,9 @@ class Database {
                 Database.connect();
             }, 10000);
         })
-        global.db.connect(function (err) {
+        global.db.connect(function (err: any) {
             if (err) {
-                db.emit("error", err);
+                global.db.emit("error", err);
                 return;
             }
             console.log("Connected!")

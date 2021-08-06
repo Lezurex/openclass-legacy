@@ -2,19 +2,27 @@
  * Copyright (c) 2021 Lenny Angst. All rights reserved.
  * For more information about the license read the LICENSE file at the root of this repo.
  * Written for Project: openclass
- * Last modified: 3/30/21, 11:32 AM
+ * Last modified: 8/7/21, 12:59 AM
  */
 
-const express = require("express");
-const path = require("path");
-const fs = require('fs');
-const Database = require("./database/Database");
-const routes = require('./routes');
-const RateLimit = require('express-rate-limit');
-const config = require('./../config/config.json');
-const logger = require('morgan');
+import {Request, Response} from "express";
+
+import express from "express";
+import path from "path";
+import fs from 'fs';
+import Database from "./database/Database";
+import routes from './routes';
+import RateLimit from 'express-rate-limit';
+import config from './../config/config.json';
+import logger from 'morgan';
 const app = express(),
     port = 3080;
+
+declare module NodeJS{
+    interface Global {
+        db: Database
+    }
+}
 
 // Configures the rate limiter as set in the config
 const limiter = new RateLimit({
@@ -39,7 +47,7 @@ app.use(express.static(path.join(__dirname, '../webapp/dist')));
 // Bind all api routes to the endpoint
 app.use('/api', routes);
 
-app.get('/*', (req,res) => {
+app.get('/*', (req : Request, res : Response) => {
     res.sendFile(path.join(__dirname, '../webapp/dist/index.html'));
 });
 
