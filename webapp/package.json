@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^3.0.0",
-    "@tailwindcss/postcss7-compat": "^2.2.9",
+    "@tailwindcss/postcss7-compat": "^2.2.10",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.30.0",
     "@vue/cli-plugin-babel": "^4.5.13",
