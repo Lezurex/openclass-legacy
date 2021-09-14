@@ -2,5 +2,5 @@
 /api/node_modules/
 /webapp/node_modules/
 /webapp/dist
-/database/ibtmp1
+/database
 /logs
