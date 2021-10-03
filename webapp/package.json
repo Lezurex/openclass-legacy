@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@panter/vue-i18next": "^0.15.2",
-    "@popperjs/core": "^2.10.1",
+    "@popperjs/core": "^2.10.2",
     "@tailwindcss/forms": "^0.3.4",
     "@vue/runtime-core": "^3.2.12",
     "core-js": "^3.18.1",
