@@ -16,7 +16,7 @@
     "icon.place": "^1.0.3",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
-    "vue": "^3.2.19",
+    "vue": "^3.2.20",
     "vue-class-component": "^8.0.0-0",
     "vue-i18n": "^9.1.9",
     "vue-router": "^4.0.11",
