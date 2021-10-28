@@ -27,9 +27,9 @@
     "@tailwindcss/postcss7-compat": "^2.2.16",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-babel": "^4.5.14",
     "@vue/cli-plugin-eslint": "^4.5.14",
-    "@vue/cli-plugin-router": "^4.5.13",
+    "@vue/cli-plugin-router": "^4.5.14",
     "@vue/cli-plugin-typescript": "^4.5.13",
     "@vue/cli-service": "^4.5.13",
     "@vue/compiler-sfc": "^3.2.14",
@@ -40,7 +40,7 @@
     "eslint-plugin-vue": "^7.20.0",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "eslintConfig": {
     "root": true,
